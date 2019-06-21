@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'helper/api.dart';
+import 'package:blockbyte/model/soil.dart';
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
@@ -52,9 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _getSoil() async {
-    final response = await Api().getSoil();
+    List<Soil> soil = await Api().getSoil();
     setState(() {
-      _body = response.body;
+      _body = soil[0].location;
     });
   }
 }
