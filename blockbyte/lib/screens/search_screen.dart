@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:blockbyte/screens/search_result_screen.dart';
+
 import 'package:blockbyte/helper/api.dart';
 import 'package:blockbyte/model/soil.dart';
 
@@ -25,19 +27,14 @@ class SearchScreenState extends State<SearchScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text("Location"),
-                CupertinoTextField(
-                  placeholder: "Location",
-                  controller: _location,
-                ),
-              ],
+            CupertinoTextField(
+              placeholder: "Location",
+              controller: _location,
             ),
             CupertinoButton(
               onPressed: () {
                 Navigator.push(context,
-                    CupertinoPageRoute(builder: (context) => SearchScreen()));
+                    CupertinoPageRoute(builder: (context) => SearchResultScreen()));
               },
               child: Text("Search"),
             )
