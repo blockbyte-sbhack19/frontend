@@ -1,21 +1,17 @@
-import 'package:blockbyte/screens/issue_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:blockbyte/helper/api.dart';
-import 'package:blockbyte/model/soil.dart';
+import 'package:blockbyte/screens/issue_screen.dart';
+import 'package:blockbyte/screens/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MainScreen({Key key}) : super(key: key);
 
   @override
   MainScreenState createState() => MainScreenState();
 }
 
 class MainScreenState extends State<MainScreen> {
-  String _body = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +32,17 @@ class MainScreenState extends State<MainScreen> {
                 );
               },
             ),
-            Text(
-              _body,
-            ),
             CupertinoButton(
-              onPressed: _getSoil,
-              child: Text("Get Soil"),
-            ),
+              child: Text("Search Soil"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => SearchScreen()),
+                );
+              },),
           ],
         ),
       ),
     );
-  }
-
-  void _getSoil() async {
-    List<Soil> soil = await Api().getSoil();
-    setState(() {
-      _body = soil[0].location;
-    });
   }
 }
