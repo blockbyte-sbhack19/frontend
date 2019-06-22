@@ -15,6 +15,7 @@ class SearchScreen extends StatefulWidget {
 
 class SearchScreenState extends State<SearchScreen> {
   var _location = TextEditingController();
+  var _size = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +24,41 @@ class SearchScreenState extends State<SearchScreen> {
         middle: Text("Search Land"),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CupertinoTextField(
-              placeholder: "Location",
-              controller: _location,
-            ),
-            CupertinoButton(
+        padding: EdgeInsets.all(8.0),
+        child: Column(children: <Widget>[
+          Expanded(
+            child: ListView(children: <Widget>[
+              Card(
+                child: Column(children: <Widget>[
+                  Text("Location"),
+                        ListTile(
+                          leading: Text("ZIP Code"),
+                          title: CupertinoTextField(
+                            controller: _location,
+                            placeholder: "8000",
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        ListTile(
+                          leading: Text("Size"),
+                          title: CupertinoTextField(
+                            controller: _size,
+                            placeholder: "1000",
+                            keyboardType: TextInputType.number,
+                          ),
+                        )
+                ]),
+              )
+            ]),
+          ),
+          CupertinoButton(
               onPressed: () {
                 Navigator.push(context,
                     CupertinoPageRoute(builder: (context) => SearchResultScreen()));
               },
               child: Text("Search"),
             )
-          ],
-        ),
+        ]),
       ),
     );
   }

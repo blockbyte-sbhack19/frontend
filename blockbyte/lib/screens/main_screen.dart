@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:blockbyte/screens/issue_screen.dart';
 import 'package:blockbyte/screens/search_screen.dart';
-import 'package:blockbyte/screens/filter_screen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -13,44 +12,53 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text("Home"),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CupertinoButton(
-              child: Text("Issue Land"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) => IssueScreen()),
-                );
-              },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          new GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => IssueScreen()),
+              );
+            },
+            child: SizedBox(
+              height: 300,
+              child: Card(
+                child: Center(
+                    child: Text(
+                  "Lender",
+                  style: TextStyle(fontSize: 64.0),
+                )),
+              ),
             ),
-            CupertinoButton(
-              child: Text("Search Land"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) => SearchScreen()),
-                );
-              },),
-              CupertinoButton(
-              child: Text("Lender Screen"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) => LenderWidget()),
-                );
-              },),
-          ],
-        ),
+          ),
+          new GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => SearchScreen()),
+              );
+            },
+            child: SizedBox(
+              height: 300,
+              child: Card(
+                child: Center(
+                    child: Text(
+                  "Borrower",
+                  style: TextStyle(fontSize: 64.0),
+                )),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
