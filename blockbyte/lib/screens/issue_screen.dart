@@ -12,8 +12,8 @@ class IssueScreen extends StatefulWidget {
 }
 
 class IssueScreenState extends State<IssueScreen> {
-  var _location = TextEditingController(text: "");
-  var _size = TextEditingController(text: "");
+  var _coordinate = TextEditingController(text: "");
+  var _landSize = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class IssueScreenState extends State<IssueScreen> {
                         ListTile(
                           leading: Text("ZIP Code"),
                           title: CupertinoTextField(
-                            controller: _location,
+                            controller: _coordinate,
                             placeholder: "8000",
                             keyboardType: TextInputType.number,
                           ),
@@ -43,7 +43,7 @@ class IssueScreenState extends State<IssueScreen> {
                         ListTile(
                           leading: Text("Size"),
                           title: CupertinoTextField(
-                            controller: _size,
+                            controller: _landSize,
                             placeholder: "1000",
                             keyboardType: TextInputType.number,
                           ),
@@ -63,7 +63,7 @@ class IssueScreenState extends State<IssueScreen> {
   }
 
   void _issueLand() async {
-    var land = Land(location: _location.text, size: double.parse(_size.text));
+    var land = Land(coordinate: _coordinate.text, landSize: double.parse(_landSize.text));
     await Api().issueLand(land);
     showDialog(
       context: context,

@@ -14,8 +14,8 @@ class IssueScreen extends StatefulWidget {
 
 class IssueScreenState extends State<IssueScreen> {
   final double _kPickerSheetHeight = 216.0;
-  var _location = TextEditingController(text: "47.318549 8,8.7921308");
-  var _size = TextEditingController(text: "12.52");
+  var _coordinate = TextEditingController(text: "47.318549 8,8.7921308");
+  var _landSize = TextEditingController(text: "12.52");
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
 
@@ -137,6 +137,7 @@ class IssueScreenState extends State<IssueScreen> {
                 itemBuilder: (context, index) => _cellItemWidget(),
               ),
             ),
+            
           ],
         ),
       ),
@@ -145,10 +146,10 @@ class IssueScreenState extends State<IssueScreen> {
 
   void _issueLand() async {
     var land = Land(
-      location: _location.text,
-      size: double.parse(_size.text),
-      beforeDate: _beforeDate.millisecondsSinceEpoch.toString(),
-      afterDate: _afterDate.millisecondsSinceEpoch.toString());
+      coordinate: _coordinate.text,
+      landSize: double.parse(_landSize.text),
+      beforeDate: _beforeDate,
+      afterDate: _afterDate);
     await Api().issueLand(land);
     showDialog(
       context: context,
@@ -267,7 +268,7 @@ class IssueScreenState extends State<IssueScreen> {
                                   alignment: Alignment.topLeft,
                                   child: Container(
                                     child: TextField(
-                                      controller: _location,
+                                      controller: _coordinate,
                                       style: TextStyle(
                                         color: Color.fromARGB(255, 51, 59, 69),
                                         fontSize: 14,
@@ -374,7 +375,7 @@ class IssueScreenState extends State<IssueScreen> {
                             alignment: Alignment.topLeft,
                             child: Container(
                               child: TextField(
-                                controller: _size,
+                                controller: _landSize,
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 51, 59, 69),
                                   fontSize: 14,

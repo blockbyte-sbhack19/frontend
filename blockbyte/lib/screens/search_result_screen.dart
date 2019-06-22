@@ -32,7 +32,7 @@ class SearchResultScreenState extends State<SearchResultScreen> {
   void _getLand() async {
     List<Land> land = await Api().getLand();
     setState(() {
-      _location.text = land[0].location;
+      _location.text = land[0].coordinate;
     });
   }
 }

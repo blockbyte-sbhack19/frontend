@@ -31,12 +31,25 @@ class MainScreenState extends State<MainScreen> {
             },
             child: SizedBox(
               height: 300,
-              child: Card(
-                child: Center(
-                    child: Text(
-                  "Lender",
-                  style: TextStyle(fontSize: 64.0),
-                )),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 61, 146, 86),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(19, 0, 0, 0),
+                      offset: Offset(0, 2),
+                      blurRadius: 38,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                ),
+                child: Card(
+                  child: Center(
+                      child: Text(
+                    "Lender",
+                    style: TextStyle(fontSize: 64.0),
+                  )),
+                ),
               ),
             ),
           ),
