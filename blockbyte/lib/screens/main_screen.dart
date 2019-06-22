@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:blockbyte/screens/issue_screen.dart';
+import 'package:blockbyte/screens/issue_screen_new.dart';
 import 'package:blockbyte/screens/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
