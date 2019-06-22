@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:blockbyte/screens/issue_screen_new.dart';
+import 'package:blockbyte/screens/lender_screen.dart';
 import 'package:blockbyte/screens/leaser_screen.dart';
+import 'package:blockbyte/screens/result_screen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -14,11 +15,8 @@ class MainScreen extends StatefulWidget {
 class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("Home"),
-      ),
-      child: Column(
+    return Scaffold(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -26,30 +24,17 @@ class MainScreenState extends State<MainScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                CupertinoPageRoute(builder: (context) => IssueScreen()),
+                CupertinoPageRoute(builder: (context) => LenderScreen()),
               );
             },
             child: SizedBox(
-              height: 300,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 61, 146, 86),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(19, 0, 0, 0),
-                      offset: Offset(0, 2),
-                      blurRadius: 38,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                ),
-                child: Card(
-                  child: Center(
-                      child: Text(
-                    "Lender",
-                    style: TextStyle(fontSize: 64.0),
-                  )),
-                ),
+              height: 200,
+              child: Card(
+                child: Center(
+                    child: Text(
+                  "Lender",
+                  style: TextStyle(fontSize: 64.0),
+                )),
               ),
             ),
           ),
@@ -61,11 +46,29 @@ class MainScreenState extends State<MainScreen> {
               );
             },
             child: SizedBox(
-              height: 300,
+              height: 200,
               child: Card(
                 child: Center(
                     child: Text(
                   "Leaser",
+                  style: TextStyle(fontSize: 64.0),
+                )),
+              ),
+            ),
+          ),
+          new GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => ResultScreen()),
+              );
+            },
+            child: SizedBox(
+              height: 200,
+              child: Card(
+                child: Center(
+                    child: Text(
+                  "Result",
                   style: TextStyle(fontSize: 64.0),
                 )),
               ),

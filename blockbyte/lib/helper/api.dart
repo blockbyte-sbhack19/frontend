@@ -7,18 +7,16 @@ class Api {
   static final Api _instance = new Api._internal();
   Api._internal();
 
-  final _urlIssueLand =
-      "https://virtserver.swaggerhub.com/Blockbyte/issueSoil/1.0.0";
+  final _urlLender = "http://52.209.35.41:8081/api/lender/";
 
   Future<List<Land>> getLand() async {
-    List jsonList = json.decode(await _get("$_urlIssueLand/soil"));
-    List<Land> lands =
-        jsonList.map((land) => Land.fromJson(land)).toList();
+    List jsonList = json.decode(await _get("$_urlLender/soil"));
+    List<Land> lands = jsonList.map((land) => Land.fromJson(land)).toList();
     return lands;
   }
 
   Future<void> issueLand(Land land) async {
-    await _post("$_urlIssueLand/soil", land.toJson());
+    await _post("$_urlLender/soil", land.toJson());
   }
 
   Future<String> _get(String url) async {
@@ -32,9 +30,10 @@ class Api {
   }
 
   Future<void> _post(String url, Map body) async {
-    final response = await http.post(url, body: json.encode(body));
+    final response = await http.post(url,
+        body: json.encode(body), headers: {"Content-Type": "application/json"});
 
-    if (response.statusCode != 201) {
+    if (response.statusCode != 200) {
       throw Exception('Failed to load post');
     }
   }

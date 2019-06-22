@@ -5,16 +5,16 @@ import 'package:intl/intl.dart';
 import 'package:blockbyte/helper/api.dart';
 import 'package:blockbyte/model/land.dart';
 
-class IssueScreen extends StatefulWidget {
+class LenderScreen extends StatefulWidget {
   @override
-  IssueScreenState createState() {
-    return IssueScreenState();
+  LenderScreenState createState() {
+    return LenderScreenState();
   }
 }
 
-class IssueScreenState extends State<IssueScreen> {
+class LenderScreenState extends State<LenderScreen> {
   final double _kPickerSheetHeight = 216.0;
-  var _coordinate = TextEditingController(text: "47.318549, 8.7921308");
+  var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
@@ -146,8 +146,11 @@ class IssueScreenState extends State<IssueScreen> {
 
   void _issueLand() async {
     var land = Land(
-      coordinate: _coordinate.text.split(','),
+      latitude: int.parse(_coordinate.text.split(',')[0]),
+      longitude: int.parse(_coordinate.text.split(',')[1]),
       landSize: double.parse(_landSize.text),
+      feeForStandard: {},
+      feeForCrop: {},
       beforeDate: _beforeDate,
       afterDate: _afterDate);
     await Api().issueLand(land);
