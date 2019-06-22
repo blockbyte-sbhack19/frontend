@@ -63,5 +63,13 @@ class IssueScreenState extends State<IssueScreen> {
   void _issueLand() async {
     var land = Land(location: _location.text, size: double.parse(_size.text));
     await Api().issueLand(land);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => new CupertinoAlertDialog(
+        content: new Text("Offer has been sent successfully"),
+      ),
+    ).then((value) {
+      Navigator.pop(context);
+    });
   }
 }
