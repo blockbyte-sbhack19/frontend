@@ -13,110 +13,11 @@ class ResultScreen extends StatefulWidget {
 }
 
 class ResultScreenState extends State<ResultScreen> {
-  final double _kPickerSheetHeight = 216.0;
+  final String _dateFormat = "dd/MM/yyyy";
   var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
-
-  Widget _buildBottomPicker(Widget picker) {
-    return Container(
-      height: _kPickerSheetHeight,
-      padding: const EdgeInsets.only(top: 6.0),
-      color: CupertinoColors.white,
-      child: DefaultTextStyle(
-        style: const TextStyle(
-          color: CupertinoColors.black,
-          fontSize: 22.0,
-        ),
-        child: GestureDetector(
-          // Blocks taps from propagating to the modal sheet and popping.
-          onTap: () {},
-          child: SafeArea(
-            top: false,
-            child: picker,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenu(List<Widget> children) {
-    return Container(
-      decoration: BoxDecoration(
-        color: CupertinoTheme.of(context).scaffoldBackgroundColor,
-        border: const Border(
-          top: BorderSide(color: Color(0xFFBCBBC1), width: 0.0),
-          bottom: BorderSide(color: Color(0xFFBCBBC1), width: 0.0),
-        ),
-      ),
-      height: 24.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: SafeArea(
-          left: false,
-          right: false,
-          child: Column(
-            children: children,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDatePickerBeforeDate(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showCupertinoModalPopup<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return _buildBottomPicker(
-              CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: _beforeDate,
-                onDateTimeChanged: (DateTime newDateTime) {
-                  setState(() => _beforeDate = newDateTime);
-                },
-              ),
-            );
-          },
-        );
-      },
-      child: _buildMenu(<Widget>[
-        const Text('Lease Start Date'),
-        Text(
-          DateFormat.yMMMMd().format(_beforeDate),
-        ),
-      ]),
-    );
-  }
-
-  Widget _buildDatePickerAfterDate(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showCupertinoModalPopup<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return _buildBottomPicker(
-              CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: _afterDate,
-                onDateTimeChanged: (DateTime newDateTime) {
-                  setState(() => _afterDate = newDateTime);
-                },
-              ),
-            );
-          },
-        );
-      },
-      child: _buildMenu(<Widget>[
-        const Text('Lease End Date'),
-        Text(
-          DateFormat.yMMMMd().format(_afterDate),
-        ),
-      ]),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -293,7 +194,7 @@ class ResultScreenState extends State<ResultScreen> {
                                               Radius.circular(2)),
                                         ),
                                         child: Container(
-                                          margin: EdgeInsets.only(top: 4),
+                                          margin: EdgeInsets.only(top: 3),
                                           child: Text(
                                             "93%",
                                             style: TextStyle(
@@ -485,8 +386,31 @@ class ResultScreenState extends State<ResultScreen> {
                                                 ),
                                                 child: Container(
                                                   child:
-                                                      _buildDatePickerBeforeDate(
-                                                          context),
+                                                      Column(children: <Widget>[Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease Start Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_beforeDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),],)
                                                 ),
                                               ),
                                             ),
@@ -513,8 +437,31 @@ class ResultScreenState extends State<ResultScreen> {
                                                 ),
                                                 child: Container(
                                                   child:
-                                                      _buildDatePickerAfterDate(
-                                                          context),
+                                                      Column(children: <Widget>[Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease End Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_afterDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),],)
                                                 ),
                                               ),
                                             ),

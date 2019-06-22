@@ -6,16 +6,18 @@ final String _keyFeeForStandard = 'feeForStandard';
 final String _keyFeeForCrop = 'feeForCrop';
 final String _keyBeforeDate = 'beforeDate';
 final String _keyAfterDate = 'afterDate';
+final String _keyInsurance = 'insurance';
 
 class Land {
   final int latitude;
   final int longitude;
   final double landSize;
-  final double landPrice;
+  final int landPrice;
   final Map feeForStandard;
   final Map feeForCrop;
   final DateTime beforeDate;
   final DateTime afterDate;
+  final bool insurance;
 
   Land(
       {this.latitude,
@@ -25,7 +27,8 @@ class Land {
       this.feeForStandard,
       this.feeForCrop,
       this.beforeDate,
-      this.afterDate});
+      this.afterDate,
+      this.insurance});
 
   factory Land.fromJson(Map<String, dynamic> json) {
     return Land(
@@ -37,6 +40,7 @@ class Land {
       feeForCrop: Map.from(json[_keyFeeForCrop]),
       beforeDate: DateTime.fromMillisecondsSinceEpoch(json[_keyBeforeDate]),
       afterDate: DateTime.fromMillisecondsSinceEpoch(json[_keyAfterDate]),
+      insurance: json[_keyInsurance]
     );
   }
 
@@ -48,6 +52,7 @@ class Land {
         _keyFeeForStandard: feeForStandard,
         _keyFeeForCrop: feeForCrop,
         _keyBeforeDate: beforeDate.millisecondsSinceEpoch,
-        _keyAfterDate: afterDate.millisecondsSinceEpoch
+        _keyAfterDate: afterDate.millisecondsSinceEpoch,
+        _keyInsurance: insurance
       };
 }

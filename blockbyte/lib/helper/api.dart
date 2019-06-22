@@ -10,7 +10,7 @@ class Api {
   Api._internal();
 
   final _urlLender = "http://52.209.35.41:8081/api/lender/";
-  final _urlLeaser = "http://52.209.35.41:8081/api/leaser/";
+  final _urlLeaser = "http://52.209.35.41:8082/api/leaser/";
 
   Future<void> issueLand(Land land) async {
     await _post("$_urlLender/soil", land.toJson());

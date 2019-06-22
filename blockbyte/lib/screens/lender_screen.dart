@@ -13,9 +13,11 @@ class LenderScreen extends StatefulWidget {
 }
 
 class LenderScreenState extends State<LenderScreen> {
+  final String _dateFormat = "dd/MM/yyyy";
   final double _kPickerSheetHeight = 216.0;
   var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
+  var _landPrice = "20000";
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
 
@@ -83,9 +85,30 @@ class LenderScreenState extends State<LenderScreen> {
         );
       },
       child: _buildMenu(<Widget>[
-        const Text('Lease Start Date'),
-        Text(
-          DateFormat.yMMMMd().format(_beforeDate),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease Start Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_beforeDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
         ),
       ]),
     );
@@ -110,9 +133,30 @@ class LenderScreenState extends State<LenderScreen> {
         );
       },
       child: _buildMenu(<Widget>[
-        const Text('Lease End Date'),
-        Text(
-          DateFormat.yMMMMd().format(_afterDate),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease End Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_afterDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
         ),
       ]),
     );
@@ -137,7 +181,6 @@ class LenderScreenState extends State<LenderScreen> {
                 itemBuilder: (context, index) => _cellItemWidget(),
               ),
             ),
-            
           ],
         ),
       ),
@@ -146,13 +189,14 @@ class LenderScreenState extends State<LenderScreen> {
 
   void _issueLand() async {
     var land = Land(
-      latitude: int.parse(_coordinate.text.split(',')[0]),
-      longitude: int.parse(_coordinate.text.split(',')[1]),
-      landSize: double.parse(_landSize.text),
-      feeForStandard: {},
-      feeForCrop: {},
-      beforeDate: _beforeDate,
-      afterDate: _afterDate);
+        latitude: int.parse(_coordinate.text.split(',')[0]),
+        longitude: int.parse(_coordinate.text.split(',')[1]),
+        landPrice: int.parse(_landPrice),
+        landSize: double.parse(_landSize.text),
+        feeForStandard: {},
+        feeForCrop: {},
+        beforeDate: _beforeDate,
+        afterDate: _afterDate);
     await Api().issueLand(land);
     showDialog(
       context: context,
@@ -502,24 +546,26 @@ class LenderScreenState extends State<LenderScreen> {
                                           BorderRadius.all(Radius.circular(8)),
                                     ),
                                     child: Container(
-                                    width: 74,
-                                    height: 28,
-                                    child: FlatButton(
-                                      onPressed: () => this.onOption2ThreePressed(context),
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      textColor: Color.fromARGB(255, 51, 59, 69),
-                                      padding: EdgeInsets.all(0),
-                                      child: Text(
-                                        "Potato",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: "Lato",
-                                          fontWeight: FontWeight.w700,
+                                      width: 74,
+                                      height: 28,
+                                      child: FlatButton(
+                                        onPressed: () =>
+                                            this.onOption2ThreePressed(context),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        textColor:
+                                            Color.fromARGB(255, 51, 59, 69),
+                                        padding: EdgeInsets.all(0),
+                                        child: Text(
+                                          "Potato",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: "Lato",
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        textAlign: TextAlign.center,
                                       ),
-                                    ),
-                             
                                     ),
                                   ),
                                 ),
@@ -539,26 +585,27 @@ class LenderScreenState extends State<LenderScreen> {
                                           BorderRadius.all(Radius.circular(8)),
                                     ),
                                     child: Container(
-                                    width: 74,
-                                    height: 28,
-                                    child: FlatButton(
-                                      onPressed: () => this.onOptionThreePressed(context),
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      textColor: Color.fromARGB(255, 51, 59, 69),
-                                      padding: EdgeInsets.all(0),
-                                      child: Text(
-                                        "Cereal",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: "Lato",
-                                          fontWeight: FontWeight.w700,
+                                      width: 74,
+                                      height: 28,
+                                      child: FlatButton(
+                                        onPressed: () =>
+                                            this.onOptionThreePressed(context),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        textColor:
+                                            Color.fromARGB(255, 51, 59, 69),
+                                        padding: EdgeInsets.all(0),
+                                        child: Text(
+                                          "Cereal",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: "Lato",
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                  ),
-                                      
-                                    
                                   ),
                                 ),
                               ],
@@ -1007,7 +1054,7 @@ class LenderScreenState extends State<LenderScreen> {
                           width: 159,
                           height: 67,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(38, 168, 182, 200),
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromARGB(19, 0, 0, 0),
@@ -1163,7 +1210,7 @@ class LenderScreenState extends State<LenderScreen> {
                     height: 80,
                     margin: EdgeInsets.only(top: 10, right: 1),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(38, 168, 182, 200),
                       boxShadow: [
                         BoxShadow(
                           color: Color.fromARGB(19, 0, 0, 0),
@@ -1213,7 +1260,7 @@ class LenderScreenState extends State<LenderScreen> {
                                 child: Container(
                                   margin: EdgeInsets.only(left: 9),
                                   child: Text(
-                                    "20’000",
+                                    _landPrice,
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 37, 37, 37),
                                       fontSize: 16,
@@ -1275,38 +1322,21 @@ class LenderScreenState extends State<LenderScreen> {
         ],
       ),
     );
+  }
 
-      
-  }
-  void onOption2Pressed(BuildContext context) {
-  
-  }
-  
-  void onOptionPressed(BuildContext context) {
-  
-  }
-  
-  void onOption2TwoPressed(BuildContext context) {
-  
-  }
-  
-  void onOptionTwoPressed(BuildContext context) {
-  
-  }
-  
-  void onOption2ThreePressed(BuildContext context) {
-  
-  }
-  
-  void onOptionThreePressed(BuildContext context) {
-  
-  }
-  
-  void onOption2FourPressed(BuildContext context) {
-  
-  }
-  
-  void onOptionFourPressed(BuildContext context) {
-  
-  }
+  void onOption2Pressed(BuildContext context) {}
+
+  void onOptionPressed(BuildContext context) {}
+
+  void onOption2TwoPressed(BuildContext context) {}
+
+  void onOptionTwoPressed(BuildContext context) {}
+
+  void onOption2ThreePressed(BuildContext context) {}
+
+  void onOptionThreePressed(BuildContext context) {}
+
+  void onOption2FourPressed(BuildContext context) {}
+
+  void onOptionFourPressed(BuildContext context) {}
 }

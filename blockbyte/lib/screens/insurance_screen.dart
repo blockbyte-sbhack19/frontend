@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class InsuranceScreen extends StatefulWidget {
   @override
@@ -9,6 +10,14 @@ class InsuranceScreen extends StatefulWidget {
 }
 
 class InsuranceScreenState extends State<InsuranceScreen> {
+  final String _dateFormat = "dd/MM/yyyy";
+  final double _kPickerSheetHeight = 216.0;
+  var _coordinate = TextEditingController(text: "47,8");
+  var _landSize = TextEditingController(text: "12.52");
+  var _landPrice = "20000";
+  var _beforeDate = DateTime.parse("2020-01-01");
+  var _afterDate = DateTime.parse("2022-01-01");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +40,147 @@ class InsuranceScreenState extends State<InsuranceScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildBottomPicker(Widget picker) {
+    return Container(
+      height: _kPickerSheetHeight,
+      padding: const EdgeInsets.only(top: 6.0),
+      color: CupertinoColors.white,
+      child: DefaultTextStyle(
+        style: const TextStyle(
+          color: CupertinoColors.black,
+          fontSize: 22.0,
+        ),
+        child: GestureDetector(
+          // Blocks taps from propagating to the modal sheet and popping.
+          onTap: () {},
+          child: SafeArea(
+            top: false,
+            child: picker,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenu(List<Widget> children) {
+    return Container(
+      decoration: BoxDecoration(
+        color: CupertinoTheme.of(context).scaffoldBackgroundColor,
+        border: const Border(
+          top: BorderSide(color: Color(0xFFBCBBC1), width: 0.0),
+          bottom: BorderSide(color: Color(0xFFBCBBC1), width: 0.0),
+        ),
+      ),
+      height: 24.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: SafeArea(
+          left: false,
+          right: false,
+          child: Column(
+            children: children,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDatePickerBeforeDate(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showCupertinoModalPopup<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return _buildBottomPicker(
+              CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: _beforeDate,
+                onDateTimeChanged: (DateTime newDateTime) {
+                  setState(() => _beforeDate = newDateTime);
+                },
+              ),
+            );
+          },
+        );
+      },
+      child: _buildMenu(<Widget>[
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease Start Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_beforeDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ]),
+    );
+  }
+
+  Widget _buildDatePickerAfterDate(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showCupertinoModalPopup<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return _buildBottomPicker(
+              CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: _afterDate,
+                onDateTimeChanged: (DateTime newDateTime) {
+                  setState(() => _afterDate = newDateTime);
+                },
+              ),
+            );
+          },
+        );
+      },
+      child: _buildMenu(<Widget>[
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease End Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_afterDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ]),
     );
   }
 
@@ -119,7 +269,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   height: 46,
                                   margin: EdgeInsets.only(left: 17, right: 1),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
@@ -137,7 +288,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                         child: Container(
                                           width: 54,
                                           height: 34,
-                                          margin: EdgeInsets.only(left: 12, top: 12),
+                                          margin: EdgeInsets.only(
+                                              left: 12, top: 12),
                                           child: TextField(
                                             decoration: InputDecoration(
                                               hintText: "B. Haller\n",
@@ -145,8 +297,9 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                               border: InputBorder.none,
                                             ),
                                             style: TextStyle(
-                                              color: Color.fromARGB(255, 255, 255, 255),
-                                              fontSize: 14,
+                                              color: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                              fontSize: 12,
                                               fontFamily: "Lato",
                                               fontWeight: FontWeight.w700,
                                             ),
@@ -167,12 +320,14 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                               Expanded(
                                                 flex: 1,
                                                 child: Container(
-                                                  margin: EdgeInsets.only(right: 6),
+                                                  margin:
+                                                      EdgeInsets.only(right: 6),
                                                   child: Text(
                                                     "Risk Score",
                                                     style: TextStyle(
-                                                      color: Color.fromARGB(255, 255, 255, 255),
-                                                      fontSize: 14,
+                                                      color: Color.fromARGB(
+                                                          255, 255, 255, 255),
+                                                      fontSize: 12,
                                                       fontFamily: "Lato",
                                                     ),
                                                     textAlign: TextAlign.left,
@@ -183,46 +338,28 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                                 width: 58,
                                                 height: 20,
                                                 decoration: BoxDecoration(
-                                                  color: Color.fromARGB(255, 255, 151, 84),
-                                                  borderRadius: BorderRadius.all(Radius.circular(2)),
+                                                  color: Color.fromARGB(
+                                                      255, 255, 151, 84),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(2)),
                                                 ),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: 14,
-                                                      height: 12,
-                                                      margin: EdgeInsets.only(left: 16),
-                                                      child: TextField(
-                                                        decoration: InputDecoration(
-                                                          hintText: "66",
-                                                          contentPadding: EdgeInsets.all(0),
-                                                          border: InputBorder.none,
-                                                        ),
-                                                        style: TextStyle(
-                                                          color: Color.fromARGB(255, 255, 255, 255),
-                                                          fontSize: 10,
-                                                          fontFamily: "SF Compact Text",
-                                                          fontWeight: FontWeight.w600,
-                                                        ),
-                                                        maxLines: 1,
-                                                        autocorrect: false,
-                                                      ),
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 3),
+                                                  child: Text(
+                                                    "66%",
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 255, 255, 255),
+                                                      fontSize: 10,
+                                                      fontFamily:
+                                                          "SF Compact Text",
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                     ),
-                                                    Spacer(),
-                                                    Container(
-                                                      margin: EdgeInsets.only(right: 19),
-                                                      child: Text(
-                                                        "%",
-                                                        style: TextStyle(
-                                                          color: Color.fromARGB(255, 255, 255, 255),
-                                                          fontSize: 10,
-                                                          fontFamily: "SF Compact Text",
-                                                          fontWeight: FontWeight.w600,
-                                                        ),
-                                                        textAlign: TextAlign.center,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                    textAlign: TextAlign.center,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -244,7 +381,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                         blurRadius: 38,
                                       ),
                                     ],
-                                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
                                   ),
                                   child: Row(
                                     children: [
@@ -253,7 +391,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                         child: Text(
                                           "Size",
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 92, 105, 121),
+                                            color: Color.fromARGB(
+                                                255, 92, 105, 121),
                                             fontSize: 14,
                                             fontFamily: "Lato",
                                           ),
@@ -272,7 +411,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                             border: InputBorder.none,
                                           ),
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 18,
                                             fontFamily: "Open Sans",
                                             fontWeight: FontWeight.w700,
@@ -286,7 +426,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                         child: Text(
                                           "hectar",
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 18,
                                             fontFamily: "Open Sans",
                                             fontWeight: FontWeight.w700,
@@ -307,51 +448,22 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                         width: 147,
                                         height: 58,
                                         decoration: BoxDecoration(
-                                          color: Color.fromARGB(255, 255, 255, 255),
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Color.fromARGB(19, 0, 0, 0),
+                                              color:
+                                                  Color.fromARGB(19, 0, 0, 0),
                                               offset: Offset(0, 2),
                                               blurRadius: 38,
                                             ),
                                           ],
-                                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(6)),
                                         ),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.only(left: 20, top: 8),
-                                              child: Text(
-                                                "Lease Start Date",
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(255, 156, 155, 156),
-                                                  fontSize: 12,
-                                                  fontFamily: "Lato",
-                                                ),
-                                                textAlign: TextAlign.left,
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 74,
-                                              height: 18,
-                                              margin: EdgeInsets.only(left: 25, top: 5),
-                                              child: TextField(
-                                                decoration: InputDecoration(
-                                                  hintText: "01/01/2020",
-                                                  contentPadding: EdgeInsets.all(0),
-                                                  border: InputBorder.none,
-                                                ),
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(255, 37, 37, 37),
-                                                  fontSize: 14,
-                                                  fontFamily: ".SF NS Text",
-                                                ),
-                                                maxLines: 1,
-                                                autocorrect: false,
-                                              ),
-                                            ),
-                                          ],
+                                        child: Container(
+                                          child: _buildDatePickerBeforeDate(
+                                              context),
                                         ),
                                       ),
                                       Spacer(),
@@ -359,54 +471,22 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                         width: 147,
                                         height: 58,
                                         decoration: BoxDecoration(
-                                          color: Color.fromARGB(255, 255, 255, 255),
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Color.fromARGB(19, 0, 0, 0),
+                                              color:
+                                                  Color.fromARGB(19, 0, 0, 0),
                                               offset: Offset(0, 2),
                                               blurRadius: 38,
                                             ),
                                           ],
-                                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(6)),
                                         ),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.only(left: 28, top: 8),
-                                              child: Text(
-                                                "Lease End Date",
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(255, 156, 155, 156),
-                                                  fontSize: 12,
-                                                  fontFamily: "Lato",
-                                                ),
-                                                textAlign: TextAlign.left,
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topCenter,
-                                              child: Container(
-                                                width: 73,
-                                                height: 18,
-                                                margin: EdgeInsets.only(top: 5),
-                                                child: TextField(
-                                                  decoration: InputDecoration(
-                                                    hintText: "31/12/2022",
-                                                    contentPadding: EdgeInsets.all(0),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(255, 37, 37, 37),
-                                                    fontSize: 14,
-                                                    fontFamily: ".SF NS Text",
-                                                  ),
-                                                  maxLines: 1,
-                                                  autocorrect: false,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                        child: Container(
+                                          child: _buildDatePickerAfterDate(
+                                              context),
                                         ),
                                       ),
                                     ],
@@ -431,7 +511,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   blurRadius: 38,
                                 ),
                               ],
-                              borderRadius: BorderRadius.all(Radius.circular(6)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -453,14 +534,16 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   height: 24,
                                   margin: EdgeInsets.only(left: 14, top: 6),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           "ETH",
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 18,
                                             fontFamily: "Open Sans",
                                             fontWeight: FontWeight.w700,
@@ -481,7 +564,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                               border: InputBorder.none,
                                             ),
                                             style: TextStyle(
-                                              color: Color.fromARGB(255, 37, 37, 37),
+                                              color: Color.fromARGB(
+                                                  255, 37, 37, 37),
                                               fontSize: 18,
                                               fontFamily: "Open Sans",
                                               fontWeight: FontWeight.w700,
@@ -514,7 +598,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   blurRadius: 38,
                                 ),
                               ],
-                              borderRadius: BorderRadius.all(Radius.circular(6)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -536,14 +621,16 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   height: 24,
                                   margin: EdgeInsets.only(left: 14, top: 6),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           "ETH",
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 18,
                                             fontFamily: "Open Sans",
                                             fontWeight: FontWeight.w700,
@@ -564,7 +651,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                               border: InputBorder.none,
                                             ),
                                             style: TextStyle(
-                                              color: Color.fromARGB(255, 37, 37, 37),
+                                              color: Color.fromARGB(
+                                                  255, 37, 37, 37),
                                               fontSize: 18,
                                               fontFamily: "Open Sans",
                                               fontWeight: FontWeight.w700,
@@ -583,7 +671,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                         ),
                         Container(
                           height: 40,
-                          margin: EdgeInsets.only(left: 41, right: 41, bottom: 23),
+                          margin:
+                              EdgeInsets.only(left: 41, right: 41, bottom: 23),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
@@ -593,10 +682,14 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   width: 112,
                                   height: 40,
                                   child: FlatButton(
-                                    onPressed: () => this.onBtnPaymentTwoPressed(context),
+                                    onPressed: () =>
+                                        this.onBtnPaymentTwoPressed(context),
                                     color: Color.fromARGB(255, 61, 146, 86),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
-                                    textColor: Color.fromARGB(255, 255, 255, 255),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4))),
+                                    textColor:
+                                        Color.fromARGB(255, 255, 255, 255),
                                     padding: EdgeInsets.all(0),
                                     child: Text(
                                       "Get Insurance",
@@ -617,10 +710,14 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   width: 112,
                                   height: 40,
                                   child: FlatButton(
-                                    onPressed: () => this.onBtnPaymentPressed(context),
+                                    onPressed: () =>
+                                        this.onBtnPaymentPressed(context),
                                     color: Color.fromARGB(255, 255, 78, 78),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
-                                    textColor: Color.fromARGB(255, 255, 255, 255),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4))),
+                                    textColor:
+                                        Color.fromARGB(255, 255, 255, 255),
                                     padding: EdgeInsets.all(0),
                                     child: Text(
                                       "No Insurance",
@@ -676,7 +773,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   width: 146,
                                   height: 28,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
@@ -684,10 +782,15 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                           width: 69,
                                           height: 28,
                                           child: FlatButton(
-                                            onPressed: () => this.onOption2Pressed(context),
-                                            color: Color.fromARGB(255, 255, 255, 255),
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-                                            textColor: Color.fromARGB(255, 51, 59, 69),
+                                            onPressed: () =>
+                                                this.onOption2Pressed(context),
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(8))),
+                                            textColor:
+                                                Color.fromARGB(255, 51, 59, 69),
                                             padding: EdgeInsets.all(0),
                                             child: Text(
                                               "Drought",
@@ -708,10 +811,15 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                           height: 28,
                                           margin: EdgeInsets.only(left: 8),
                                           child: FlatButton(
-                                            onPressed: () => this.onOptionPressed(context),
-                                            color: Color.fromARGB(39, 168, 182, 200),
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-                                            textColor: Color.fromARGB(255, 51, 59, 69),
+                                            onPressed: () =>
+                                                this.onOptionPressed(context),
+                                            color: Color.fromARGB(
+                                                39, 168, 182, 200),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(8))),
+                                            textColor:
+                                                Color.fromARGB(255, 51, 59, 69),
                                             padding: EdgeInsets.all(0),
                                             child: Text(
                                               "Hail",
@@ -740,7 +848,9 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                           child: FlatButton(
                             onPressed: () => this.onOption2TwoPressed(context),
                             color: Color.fromARGB(39, 168, 182, 200),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
                             textColor: Color.fromARGB(255, 51, 59, 69),
                             padding: EdgeInsets.all(0),
                             child: Text(
@@ -761,7 +871,9 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                           child: FlatButton(
                             onPressed: () => this.onOptionTwoPressed(context),
                             color: Color.fromARGB(39, 168, 182, 200),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
                             textColor: Color.fromARGB(255, 51, 59, 69),
                             padding: EdgeInsets.all(0),
                             child: Text(
@@ -787,27 +899,15 @@ class InsuranceScreenState extends State<InsuranceScreen> {
     );
   }
 
-  void onBtnPaymentPressed(BuildContext context) {
-  
-  }
-  
-  void onBtnPaymentTwoPressed(BuildContext context) {
-  
-  }
-  
-  void onOption2Pressed(BuildContext context) {
-  
-  }
-  
-  void onOptionPressed(BuildContext context) {
-  
-  }
-  
-  void onOption2TwoPressed(BuildContext context) {
-  
-  }
-  
-  void onOptionTwoPressed(BuildContext context) {
-  
-  }
+  void onBtnPaymentPressed(BuildContext context) {}
+
+  void onBtnPaymentTwoPressed(BuildContext context) {}
+
+  void onOption2Pressed(BuildContext context) {}
+
+  void onOptionPressed(BuildContext context) {}
+
+  void onOption2TwoPressed(BuildContext context) {}
+
+  void onOptionTwoPressed(BuildContext context) {}
 }

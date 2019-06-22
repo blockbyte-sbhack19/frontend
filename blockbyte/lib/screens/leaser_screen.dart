@@ -14,6 +14,7 @@ class LeaserScreen extends StatefulWidget {
 }
 
 class LeaserScreenState extends State<LeaserScreen> {
+  final String _dateFormat = "dd/MM/yyyy";
   final double _kPickerSheetHeight = 216.0;
   var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
@@ -86,9 +87,30 @@ class LeaserScreenState extends State<LeaserScreen> {
         );
       },
       child: _buildMenu(<Widget>[
-        const Text('Lease Start Date'),
-        Text(
-          DateFormat.yMMMMd().format(_beforeDate),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease Start Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_beforeDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
         ),
       ]),
     );
@@ -113,9 +135,30 @@ class LeaserScreenState extends State<LeaserScreen> {
         );
       },
       child: _buildMenu(<Widget>[
-        const Text('Lease End Date'),
-        Text(
-          DateFormat.yMMMMd().format(_afterDate),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 10),
+          child: Text(
+            "Lease End Date",
+            style: TextStyle(
+              color: Color.fromARGB(255, 156, 155, 156),
+              fontSize: 12,
+              fontFamily: "Lato",
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 15, top: 8),
+          child: Text(
+            DateFormat(_dateFormat).format(_afterDate),
+            style: TextStyle(
+              color: Color.fromARGB(255, 37, 37, 37),
+              fontSize: 14,
+              fontFamily: "",
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.left,
+          ),
         ),
       ]),
     );
