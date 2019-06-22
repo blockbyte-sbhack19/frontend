@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:blockbyte/screens/issue_screen.dart';
 import 'package:blockbyte/screens/search_screen.dart';
+import 'package:blockbyte/screens/filter_screen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -24,7 +25,7 @@ class MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CupertinoButton(
-              child: Text("Issue Soil"),
+              child: Text("Issue Land"),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -33,11 +34,19 @@ class MainScreenState extends State<MainScreen> {
               },
             ),
             CupertinoButton(
-              child: Text("Search Soil"),
+              child: Text("Search Land"),
               onPressed: () {
                 Navigator.push(
                   context,
                   CupertinoPageRoute(builder: (context) => SearchScreen()),
+                );
+              },),
+              CupertinoButton(
+              child: Text("Lender Screen"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => LenderWidget()),
                 );
               },),
           ],

@@ -1,30 +1,40 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:blockbyte/model/soil.dart';
+import 'package:blockbyte/model/land.dart';
 
 class Api {
   factory Api() => _instance;
   static final Api _instance = new Api._internal();
   Api._internal();
 
-  final _urlIssueSoil =
+  final _urlIssueLand =
       "https://virtserver.swaggerhub.com/Blockbyte/issueSoil/1.0.0";
 
-  Future<List<Soil>> getSoil() async {
-    List jsonList = json.decode(await _getResponse("$_urlIssueSoil/soil"));
-    List<Soil> soils =
-        jsonList.map((soil) => Soil.fromJson(soil)).toList();
-    return soils;
+  Future<List<Land>> getLand() async {
+    List jsonList = json.decode(await _get("$_urlIssueLand/soil"));
+    List<Land> lands =
+        jsonList.map((land) => Land.fromJson(land)).toList();
+    return lands;
   }
 
-  Future<String> _getResponse(String url) async {
+  Future<void> issueLand(Land land) async {
+    await _post("$_urlIssueLand/soil", land.toJson());
+  }
+
+  Future<String> _get(String url) async {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      // If server returns an OK response, parse the JSON.
       return response.body;
     } else {
-      // If that response was not OK, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
+
+  Future<void> _post(String url, Map body) async {
+    final response = await http.post(url, body: json.encode(body));
+
+    if (response.statusCode != 201) {
       throw Exception('Failed to load post');
     }
   }

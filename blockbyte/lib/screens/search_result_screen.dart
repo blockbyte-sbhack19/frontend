@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blockbyte/helper/api.dart';
-import 'package:blockbyte/model/soil.dart';
+import 'package:blockbyte/model/land.dart';
 
 class SearchResultScreen extends StatefulWidget {
   @override
@@ -29,10 +29,10 @@ class SearchResultScreenState extends State<SearchResultScreen> {
         ]));
   }
 
-  void _getSoil() async {
-    List<Soil> soil = await Api().getSoil();
+  void _getLand() async {
+    List<Land> land = await Api().getLand();
     setState(() {
-      _location.text = soil[0].location;
+      _location.text = land[0].location;
     });
   }
 }

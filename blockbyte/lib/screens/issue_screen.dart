@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:blockbyte/helper/api.dart';
+import 'package:blockbyte/model/land.dart';
+
 class IssueScreen extends StatefulWidget {
   @override
   IssueScreenState createState() {
@@ -9,28 +12,56 @@ class IssueScreen extends StatefulWidget {
 }
 
 class IssueScreenState extends State<IssueScreen> {
-  // final _formKey = GlobalKey<FormState>();
+  var _location = TextEditingController(text: "");
+  var _size = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text("Issue Soil"),
+        middle: Text("Issue Land"),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CupertinoTextField(
-              controller: TextEditingController(text: "test"),
-            ),
-            CupertinoButton(
-              child: Text("test"),
-            )
-          ],
-        ),
-      ),
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    Card(
+                        child: Column(
+                      children: <Widget>[
+                        Text("Location"),
+                        ListTile(
+                          leading: Text("GPS"),
+                          title: CupertinoTextField(
+                            controller: _location,
+                            placeholder: "Location",
+                          ),
+                        ),
+                        ListTile(
+                          leading: Text("Size"),
+                          title: CupertinoTextField(
+                            controller: _size,
+                            placeholder: "Size",
+                          ),
+                        )
+                      ],
+                    ))
+                  ],
+                ),
+              ),
+              CupertinoButton(
+                child: Text("Send offer"),
+                onPressed: _issueLand,
+              )
+            ],
+          )),
     );
+  }
+
+  void _issueLand() async {
+    var land = Land(location: _location.text, size: double.parse(_size.text));
+    await Api().issueLand(land);
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:blockbyte/screens/search_result_screen.dart';
 
 import 'package:blockbyte/helper/api.dart';
-import 'package:blockbyte/model/soil.dart';
+import 'package:blockbyte/model/land.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text("Search Soil"),
+        middle: Text("Search Land"),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
