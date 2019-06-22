@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:blockbyte/screens/issue_screen_new.dart';
-import 'package:blockbyte/screens/search_screen.dart';
+import 'package:blockbyte/screens/leaser_screen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -57,7 +57,7 @@ class MainScreenState extends State<MainScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                CupertinoPageRoute(builder: (context) => SearchScreen()),
+                CupertinoPageRoute(builder: (context) => LeaserScreen()),
               );
             },
             child: SizedBox(
@@ -65,7 +65,7 @@ class MainScreenState extends State<MainScreen> {
               child: Card(
                 child: Center(
                     child: Text(
-                  "Borrower",
+                  "Leaser",
                   style: TextStyle(fontSize: 64.0),
                 )),
               ),

@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:blockbyte/helper/api.dart';
 import 'package:blockbyte/model/land.dart';
 
-class IssueScreen extends StatefulWidget {
+class LeaserScreen extends StatefulWidget {
   @override
-  IssueScreenState createState() {
-    return IssueScreenState();
+  LeaserScreenState createState() {
+    return LeaserScreenState();
   }
 }
 
-class IssueScreenState extends State<IssueScreen> {
+class LeaserScreenState extends State<LeaserScreen> {
   final double _kPickerSheetHeight = 216.0;
   var _coordinate = TextEditingController(text: "47.318549, 8.7921308");
   var _landSize = TextEditingController(text: "12.52");
@@ -144,33 +144,16 @@ class IssueScreenState extends State<IssueScreen> {
     );
   }
 
-  void _issueLand() async {
-    var land = Land(
-      coordinate: _coordinate.text.split(','),
-      landSize: double.parse(_landSize.text),
-      beforeDate: _beforeDate,
-      afterDate: _afterDate);
-    await Api().issueLand(land);
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => new CupertinoAlertDialog(
-        content: new Text("Offer has been sent successfully"),
-      ),
-    ).then((value) {
-      Navigator.pop(context);
-    });
-  }
-
   Widget _cellItemWidget() {
     return Container(
-      constraints: BoxConstraints.expand(height: 800),
+      constraints: BoxConstraints.expand(height: 721),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              width: 234,
+              width: 330,
               height: 47,
               margin: EdgeInsets.only(top: 11),
               child: Column(
@@ -179,9 +162,9 @@ class IssueScreenState extends State<IssueScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Container(
-                      margin: EdgeInsets.only(left: 37),
+                      margin: EdgeInsets.only(left: 85),
                       child: Text(
-                        "Offer your land",
+                        "Lease new land",
                         style: TextStyle(
                           color: Color.fromARGB(255, 92, 105, 121),
                           fontSize: 20,
@@ -196,7 +179,7 @@ class IssueScreenState extends State<IssueScreen> {
                   Opacity(
                     opacity: 0.5,
                     child: Text(
-                      "Create a new listing your land. ",
+                      "Set your search criterias for your new land. ",
                       style: TextStyle(
                         color: Color.fromARGB(255, 95, 95, 95),
                         fontSize: 16,
@@ -290,9 +273,9 @@ class IssueScreenState extends State<IssueScreen> {
                     flex: 1,
                     child: Container(
                       height: 30,
-                      margin: EdgeInsets.only(left: 5, top: 21),
+                      margin: EdgeInsets.only(left: 36, top: 21),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 61, 146, 86),
+                        color: Color.fromARGB(255, 255, 151, 84),
                         boxShadow: [
                           BoxShadow(
                             color: Color.fromARGB(19, 0, 0, 0),
@@ -304,16 +287,20 @@ class IssueScreenState extends State<IssueScreen> {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
-                            "Get Coordinates",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 12,
-                              fontFamily: "Open Sans",
-                              fontWeight: FontWeight.w700,
+                          Container(
+                            margin: EdgeInsets.only(left: 8, right: 11),
+                            child: Text(
+                              "Get Coordinates",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontSize: 12,
+                                fontFamily: "Open Sans",
+                                fontWeight: FontWeight.w700,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
                         ],
                       ),
@@ -350,46 +337,123 @@ class IssueScreenState extends State<IssueScreen> {
                       child: Container(),
                     ),
                   ),
-                  Positioned(
-                    left: 1,
-                    top: 0,
-                    child: Container(
-                      width: 76,
-                      height: 56,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Size (hectar)",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 92, 105, 121),
-                                fontSize: 12,
-                                fontFamily: "Lato",
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              child: TextField(
-                                controller: _landSize,
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 51, 59, 69),
-                                  fontSize: 14,
-                                  fontFamily: "Lato",
-                                  fontWeight: FontWeight.w700,
+                  Container(
+                          height: 67,
+                          margin: EdgeInsets.only(right: 1),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 159,
+                                height: 67,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(19, 0, 0, 0),
+                                      offset: Offset(0, 2),
+                                      blurRadius: 38,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.all(Radius.circular(6)),
                                 ),
-                                textAlign: TextAlign.left,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(left: 15, top: 14, right: 10),
+                                      child: Text(
+                                        "Minimum Land Size (hectar)",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(255, 156, 155, 156),
+                                          fontSize: 10,
+                                          fontFamily: "Lato",
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        width: 29,
+                                        height: 18,
+                                        margin: EdgeInsets.only(left: 16, top: 6),
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            hintText: "5.00",
+                                            contentPadding: EdgeInsets.all(0),
+                                            border: InputBorder.none,
+                                          ),
+                                          style: TextStyle(
+                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            fontSize: 12,
+                                            fontFamily: ".SF NS Text",
+                                          ),
+                                          maxLines: 1,
+                                          autocorrect: false,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                              Spacer(),
+                              Container(
+                                width: 159,
+                                height: 67,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(19, 0, 0, 0),
+                                      offset: Offset(0, 2),
+                                      blurRadius: 38,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(left: 15, top: 13, right: 8),
+                                      child: Text(
+                                        "Maximum Land Size (hectar)",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(255, 156, 155, 156),
+                                          fontSize: 10,
+                                          fontFamily: "Lato",
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        width: 36,
+                                        height: 18,
+                                        margin: EdgeInsets.only(left: 15, top: 7),
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            hintText: "10.00",
+                                            contentPadding: EdgeInsets.all(0),
+                                            border: InputBorder.none,
+                                          ),
+                                          style: TextStyle(
+                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            fontSize: 12,
+                                            fontFamily: ".SF NS Text",
+                                          ),
+                                          maxLines: 1,
+                                          autocorrect: false,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                 ],
               ),
             ),
@@ -451,7 +515,7 @@ class IssueScreenState extends State<IssueScreen> {
             child: Container(
               width: 327,
               height: 48,
-              margin: EdgeInsets.only(top: 14),
+              margin: EdgeInsets.only(top: 18),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -489,18 +553,6 @@ class IssueScreenState extends State<IssueScreen> {
                                   child: Container(
                                     width: 74,
                                     height: 28,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      border: Border.all(
-                                        color: Color.fromARGB(255, 61, 146, 86),
-                                        width: 2,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
-                                    ),
-                                    child: Container(
-                                    width: 74,
-                                    height: 28,
                                     child: FlatButton(
                                       onPressed: () => this.onOption2ThreePressed(context),
                                       color: Color.fromARGB(255, 255, 255, 255),
@@ -516,8 +568,6 @@ class IssueScreenState extends State<IssueScreen> {
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
-                             
-                                    ),
                                   ),
                                 ),
                                 Align(
@@ -526,18 +576,6 @@ class IssueScreenState extends State<IssueScreen> {
                                     width: 74,
                                     height: 28,
                                     margin: EdgeInsets.only(left: 10),
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      border: Border.all(
-                                        color: Color.fromARGB(255, 61, 146, 86),
-                                        width: 2,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
-                                    ),
-                                    child: Container(
-                                    width: 74,
-                                    height: 28,
                                     child: FlatButton(
                                       onPressed: () => this.onOptionThreePressed(context),
                                       color: Color.fromARGB(255, 255, 255, 255),
@@ -554,9 +592,6 @@ class IssueScreenState extends State<IssueScreen> {
                                       ),
                                     ),
                                   ),
-                                      
-                                    
-                                  ),
                                 ),
                               ],
                             ),
@@ -570,60 +605,40 @@ class IssueScreenState extends State<IssueScreen> {
                     width: 74,
                     height: 28,
                     margin: EdgeInsets.only(top: 20, right: 10),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(39, 168, 182, 200),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 23),
-                          child: Text(
-                            "Corn",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 51, 59, 69),
-                              fontSize: 10,
-                              fontFamily: "Lato",
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                    child: FlatButton(
+                      onPressed: () => this.onOption2FourPressed(context),
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      textColor: Color.fromARGB(255, 51, 59, 69),
+                      padding: EdgeInsets.all(0),
+                      child: Text(
+                        "Corn",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Lato",
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                   Container(
                     width: 74,
                     height: 28,
                     margin: EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
+                    child: FlatButton(
+                      onPressed: () => this.onOptionFourPressed(context),
                       color: Color.fromARGB(255, 255, 255, 255),
-                      border: Border.all(
-                        color: Color.fromARGB(255, 61, 146, 86),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 12),
-                          child: Text(
-                            "Anything",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 51, 59, 69),
-                              fontSize: 10,
-                              fontFamily: "Lato",
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                      textColor: Color.fromARGB(255, 51, 59, 69),
+                      padding: EdgeInsets.all(0),
+                      child: Text(
+                        "Anything",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Lato",
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
@@ -635,7 +650,7 @@ class IssueScreenState extends State<IssueScreen> {
             child: Container(
               width: 327,
               height: 48,
-              margin: EdgeInsets.only(top: 14),
+              margin: EdgeInsets.only(top: 17),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -673,37 +688,20 @@ class IssueScreenState extends State<IssueScreen> {
                                   child: Container(
                                     width: 74,
                                     height: 28,
-                                    decoration: BoxDecoration(
+                                    child: FlatButton(
+                                      onPressed: () => this.onOption2Pressed(context),
                                       color: Color.fromARGB(255, 255, 255, 255),
-                                      border: Border.all(
-                                        color: Color.fromARGB(255, 61, 146, 86),
-                                        width: 2,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 5),
-                                          child: Text(
-                                            "Bio-Knospe",
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 51, 59, 69),
-                                              fontSize: 10,
-                                              fontFamily: "Lato",
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                      textColor: Color.fromARGB(255, 51, 59, 69),
+                                      padding: EdgeInsets.all(0),
+                                      child: Text(
+                                        "Bio-Knospe",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: "Lato",
+                                          fontWeight: FontWeight.w700,
                                         ),
-                                      ],
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -713,33 +711,21 @@ class IssueScreenState extends State<IssueScreen> {
                                     width: 74,
                                     height: 28,
                                     margin: EdgeInsets.only(left: 10),
-                                    decoration: BoxDecoration(
+                                    child: FlatButton(
+                                      onPressed: () => this.onOptionPressed(context),
                                       color: Color.fromARGB(39, 168, 182, 200),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 13),
-                                          child: Text(
-                                            "Demeter",
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 51, 59, 69),
-                                              fontSize: 10,
-                                              fontFamily: "Lato",
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                                      textColor: Color.fromARGB(255, 51, 59, 69),
+                                      padding: EdgeInsets.all(0),
+                                      child: Text(
+                                        "Demeter",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: "Lato",
+                                          fontWeight: FontWeight.w700,
                                         ),
-                                      ],
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -755,60 +741,41 @@ class IssueScreenState extends State<IssueScreen> {
                     width: 74,
                     height: 28,
                     margin: EdgeInsets.only(top: 20, right: 10),
-                    decoration: BoxDecoration(
+                    child: FlatButton(
+                      onPressed: () => this.onOption2TwoPressed(context),
                       color: Color.fromARGB(255, 255, 255, 255),
-                      border: Border.all(
-                        color: Color.fromARGB(255, 61, 146, 86),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 6),
-                          child: Text(
-                            "Naturaplan",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 51, 59, 69),
-                              fontSize: 10,
-                              fontFamily: "Lato",
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                      textColor: Color.fromARGB(255, 51, 59, 69),
+                      padding: EdgeInsets.all(0),
+                      child: Text(
+                        "Naturaplan",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Lato",
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                   Container(
                     width: 74,
                     height: 28,
                     margin: EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
+                    child: FlatButton(
+                      onPressed: () => this.onOptionTwoPressed(context),
                       color: Color.fromARGB(39, 168, 182, 200),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 9),
-                          child: Text(
-                            "Bio-Siegel",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 51, 59, 69),
-                              fontSize: 10,
-                              fontFamily: "Lato",
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                      textColor: Color.fromARGB(255, 51, 59, 69),
+                      padding: EdgeInsets.all(0),
+                      child: Text(
+                        "Bio-Siegel",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Lato",
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
@@ -820,7 +787,7 @@ class IssueScreenState extends State<IssueScreen> {
             child: Container(
               width: 325,
               height: 103,
-              margin: EdgeInsets.only(top: 14),
+              margin: EdgeInsets.only(top: 17),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -889,82 +856,20 @@ class IssueScreenState extends State<IssueScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 35,
-                    margin: EdgeInsets.only(left: 1),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.centerLeft,
-                      children: [
-                        Positioned(
-                          left: 0,
-                          top: 21,
-                          right: 0,
-                          bottom: 0,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                height: 1,
-                                margin: EdgeInsets.symmetric(horizontal: 16),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(51, 120, 120, 128),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(0.5)),
-                                ),
-                                child: Container(),
-                              ),
-                              Spacer(),
-                              Container(
-                                height: 1,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(74, 60, 60, 67),
-                                ),
-                                child: Container(),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 20,
-                          child: Container(
-                            width: 150,
-                            height: 2,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 0, 122, 255),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(0.8)),
-                            ),
-                            child: Container(),
-                          ),
-                        ),
-                        Positioned(
-                          right: 146,
-                          child: Container(
-                            width: 28,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              border: Border.all(
-                                color: Color.fromARGB(11, 0, 0, 0),
-                                width: 0.5,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(26, 0, 0, 0),
-                                  offset: Offset(0, 3),
-                                  blurRadius: 1,
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(14)),
-                            ),
-                            child: Container(),
-                          ),
-                        ),
-                      ],
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      width: 325,
+                      height: 31,
+                      margin: EdgeInsets.only(top: 5),
+                      child: Slider(
+                        inactiveColor: Color.fromARGB(255, 0, 128, 255),
+                        activeColor: Color.fromARGB(255, 184, 184, 184),
+                        min: 0,
+                        max: 1,
+                        value: 0.5,
+                        onChanged: (value) => print(value),
+                      ),
                     ),
                   ),
                   Spacer(),
@@ -989,15 +894,15 @@ class IssueScreenState extends State<IssueScreen> {
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              width: 326,
-              height: 212,
-              margin: EdgeInsets.only(bottom: 20),
+              width: 325,
+              height: 132,
+              margin: EdgeInsets.only(bottom: 21),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
                     height: 67,
-                    margin: EdgeInsets.symmetric(horizontal: 1),
+                    margin: EdgeInsets.only(right: 1),
                     child: Row(
                       children: [
                         Container(
@@ -1018,10 +923,9 @@ class IssueScreenState extends State<IssueScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(
-                                    left: 15, top: 15, right: 10),
+                                margin: EdgeInsets.only(left: 15, top: 15, right: 15),
                                 child: Text(
-                                  "Suggested Lease Price p.A.",
+                                  "Minimum Lease Price p.A.",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 156, 155, 156),
                                     fontSize: 10,
@@ -1037,16 +941,14 @@ class IssueScreenState extends State<IssueScreen> {
                                   height: 18,
                                   margin: EdgeInsets.only(left: 16, top: 6),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           "Fr.",
                                           style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 37, 37, 37),
+                                            color: Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 12,
                                             fontFamily: "",
                                             fontWeight: FontWeight.w600,
@@ -1057,17 +959,22 @@ class IssueScreenState extends State<IssueScreen> {
                                       Align(
                                         alignment: Alignment.topLeft,
                                         child: Container(
+                                          width: 45,
+                                          height: 18,
                                           margin: EdgeInsets.only(left: 4),
-                                          child: Text(
-                                            "15’000",
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 37, 37, 37),
-                                              fontSize: 12,
-                                              fontFamily: "",
-                                              fontWeight: FontWeight.w600,
+                                          child: TextField(
+                                            decoration: InputDecoration(
+                                              hintText: "15’000",
+                                              contentPadding: EdgeInsets.all(0),
+                                              border: InputBorder.none,
                                             ),
-                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              color: Color.fromARGB(255, 37, 37, 37),
+                                              fontSize: 12,
+                                              fontFamily: ".SF NS Text",
+                                            ),
+                                            maxLines: 1,
+                                            autocorrect: false,
                                           ),
                                         ),
                                       ),
@@ -1099,7 +1006,7 @@ class IssueScreenState extends State<IssueScreen> {
                               Container(
                                 margin: EdgeInsets.only(left: 15, top: 14),
                                 child: Text(
-                                  "Custom Premium p.A.",
+                                  "Maximum Lease Price p.A.",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 156, 155, 156),
                                     fontSize: 10,
@@ -1109,20 +1016,18 @@ class IssueScreenState extends State<IssueScreen> {
                                 ),
                               ),
                               Container(
-                                width: 57,
+                                width: 69,
                                 height: 18,
                                 margin: EdgeInsets.only(left: 15, top: 7),
                                 child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
                                         "Fr.",
                                         style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 37, 37, 37),
+                                          color: Color.fromARGB(255, 37, 37, 37),
                                           fontSize: 12,
                                           fontFamily: "",
                                           fontWeight: FontWeight.w600,
@@ -1133,17 +1038,22 @@ class IssueScreenState extends State<IssueScreen> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Container(
+                                        width: 47,
+                                        height: 18,
                                         margin: EdgeInsets.only(left: 5),
-                                        child: Text(
-                                          "5000",
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 37, 37, 37),
-                                            fontSize: 12,
-                                            fontFamily: "",
-                                            fontWeight: FontWeight.w600,
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            hintText: "50’000",
+                                            contentPadding: EdgeInsets.all(0),
+                                            border: InputBorder.none,
                                           ),
-                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            fontSize: 12,
+                                            fontFamily: ".SF NS Text",
+                                          ),
+                                          maxLines: 1,
+                                          autocorrect: false,
                                         ),
                                       ),
                                     ),
@@ -1156,83 +1066,11 @@ class IssueScreenState extends State<IssueScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 80,
-                    margin: EdgeInsets.only(top: 10, right: 1),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(19, 0, 0, 0),
-                          offset: Offset(0, 2),
-                          blurRadius: 38,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 15, top: 11),
-                          child: Text(
-                            "Calculated Lease Price  p.A.",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 156, 155, 156),
-                              fontSize: 13,
-                              fontFamily: "Lato",
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        Container(
-                          width: 97,
-                          height: 24,
-                          margin: EdgeInsets.only(left: 15, top: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "Fr.",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 37, 37, 37),
-                                    fontSize: 16,
-                                    fontFamily: "Open Sans",
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 9),
-                                  child: Text(
-                                    "20’000",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 37, 37, 37),
-                                      fontSize: 16,
-                                      fontFamily: "Open Sans",
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   Spacer(),
                   Container(
                     height: 45,
-                    margin: EdgeInsets.only(left: 1),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 61, 146, 86),
+                      color: Color.fromARGB(255, 255, 151, 84),
                       boxShadow: [
                         BoxShadow(
                           color: Color.fromARGB(19, 0, 0, 0),
@@ -1244,23 +1082,16 @@ class IssueScreenState extends State<IssueScreen> {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 97),
-                          child: GestureDetector(
-                            onTap: _issueLand,
-                            child: Text(
-                              "Submit Lease Offer",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 12,
-                                fontFamily: "Open Sans",
-                                fontWeight: FontWeight.w700,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
+                        Text(
+                          "Submit Lease Request",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 12,
+                            fontFamily: "Open Sans",
+                            fontWeight: FontWeight.w700,
                           ),
+                          textAlign: TextAlign.left,
                         ),
                       ],
                     ),
@@ -1272,9 +1103,8 @@ class IssueScreenState extends State<IssueScreen> {
         ],
       ),
     );
-
-      
   }
+
   void onOption2Pressed(BuildContext context) {
   
   }

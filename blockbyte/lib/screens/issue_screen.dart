@@ -63,7 +63,7 @@ class IssueScreenState extends State<IssueScreen> {
   }
 
   void _issueLand() async {
-    var land = Land(coordinate: _coordinate.text, landSize: double.parse(_landSize.text));
+    var land = Land(coordinate: _coordinate.text.split(','), landSize: double.parse(_landSize.text));
     await Api().issueLand(land);
     showDialog(
       context: context,

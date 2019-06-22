@@ -5,7 +5,7 @@ final String _keyBeforeDate = 'before_date';
 final String _keyAfterDate = 'after_date';
 
 class Land {
-  final String coordinate;
+  final List coordinate;
   final double landSize;
   final double landPrice;
   final DateTime beforeDate;
@@ -20,7 +20,7 @@ class Land {
 
   factory Land.fromJson(Map<String, dynamic> json) {
     return Land(
-      coordinate: json[_keyCoordinate],
+      coordinate: json[_keyCoordinate].split(','),
       landSize: json[_keyLandSize],
       landPrice: json[_keyLandPrice],
       beforeDate: DateTime.fromMillisecondsSinceEpoch(json[_keyBeforeDate]),
@@ -29,7 +29,7 @@ class Land {
   }
 
   Map toJson() => {
-        _keyCoordinate: coordinate,
+        _keyCoordinate: "$coordinate[0], $coordinate[1]",
         _keyLandSize: landSize,
         _keyLandPrice: landPrice,
         _keyBeforeDate: beforeDate.millisecondsSinceEpoch,
