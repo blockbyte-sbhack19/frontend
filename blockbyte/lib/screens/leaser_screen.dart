@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:blockbyte/helper/api.dart';
-import 'package:blockbyte/model/land.dart';
+import 'package:blockbyte/model/filter.dart';
+import 'package:blockbyte/screens/result_screen.dart';
 
 class LeaserScreen extends StatefulWidget {
   @override
@@ -14,8 +15,10 @@ class LeaserScreen extends StatefulWidget {
 
 class LeaserScreenState extends State<LeaserScreen> {
   final double _kPickerSheetHeight = 216.0;
-  var _coordinate = TextEditingController(text: "47.318549, 8.7921308");
+  var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
+  var _minPrice = TextEditingController(text: "0");
+  var _maxPrice = TextEditingController(text: "1000");
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
 
@@ -137,7 +140,6 @@ class LeaserScreenState extends State<LeaserScreen> {
                 itemBuilder: (context, index) => _cellItemWidget(),
               ),
             ),
-            
           ],
         ),
       ),
@@ -338,122 +340,124 @@ class LeaserScreenState extends State<LeaserScreen> {
                     ),
                   ),
                   Container(
+                    height: 67,
+                    margin: EdgeInsets.only(right: 1),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 159,
                           height: 67,
-                          margin: EdgeInsets.only(right: 1),
-                          child: Row(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(19, 0, 0, 0),
+                                offset: Offset(0, 2),
+                                blurRadius: 38,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                width: 159,
-                                height: 67,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(19, 0, 0, 0),
-                                      offset: Offset(0, 2),
-                                      blurRadius: 38,
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 15, top: 14, right: 10),
-                                      child: Text(
-                                        "Minimum Land Size (hectar)",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(255, 156, 155, 156),
-                                          fontSize: 10,
-                                          fontFamily: "Lato",
-                                        ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Container(
-                                        width: 29,
-                                        height: 18,
-                                        margin: EdgeInsets.only(left: 16, top: 6),
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            hintText: "5.00",
-                                            contentPadding: EdgeInsets.all(0),
-                                            border: InputBorder.none,
-                                          ),
-                                          style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
-                                            fontSize: 12,
-                                            fontFamily: ".SF NS Text",
-                                          ),
-                                          maxLines: 1,
-                                          autocorrect: false,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                margin: EdgeInsets.only(
+                                    left: 15, top: 14, right: 10),
+                                child: Text(
+                                  "Minimum Land Size (hectar)",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 156, 155, 156),
+                                    fontSize: 10,
+                                    fontFamily: "Lato",
+                                  ),
+                                  textAlign: TextAlign.left,
                                 ),
                               ),
-                              Spacer(),
-                              Container(
-                                width: 159,
-                                height: 67,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(19, 0, 0, 0),
-                                      offset: Offset(0, 2),
-                                      blurRadius: 38,
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Container(
+                                  width: 29,
+                                  height: 18,
+                                  margin: EdgeInsets.only(left: 16, top: 6),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: "5.00",
+                                      contentPadding: EdgeInsets.all(0),
+                                      border: InputBorder.none,
                                     ),
-                                  ],
-                                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 15, top: 13, right: 8),
-                                      child: Text(
-                                        "Maximum Land Size (hectar)",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(255, 156, 155, 156),
-                                          fontSize: 10,
-                                          fontFamily: "Lato",
-                                        ),
-                                        textAlign: TextAlign.left,
-                                      ),
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 37, 37, 37),
+                                      fontSize: 12,
+                                      fontFamily: ".SF NS Text",
                                     ),
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Container(
-                                        width: 36,
-                                        height: 18,
-                                        margin: EdgeInsets.only(left: 15, top: 7),
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            hintText: "10.00",
-                                            contentPadding: EdgeInsets.all(0),
-                                            border: InputBorder.none,
-                                          ),
-                                          style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
-                                            fontSize: 12,
-                                            fontFamily: ".SF NS Text",
-                                          ),
-                                          maxLines: 1,
-                                          autocorrect: false,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                    maxLines: 1,
+                                    autocorrect: false,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
+                        Spacer(),
+                        Container(
+                          width: 159,
+                          height: 67,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(19, 0, 0, 0),
+                                offset: Offset(0, 2),
+                                blurRadius: 38,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 15, top: 13, right: 8),
+                                child: Text(
+                                  "Maximum Land Size (hectar)",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 156, 155, 156),
+                                    fontSize: 10,
+                                    fontFamily: "Lato",
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Container(
+                                  width: 36,
+                                  height: 18,
+                                  margin: EdgeInsets.only(left: 15, top: 7),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: "10.00",
+                                      contentPadding: EdgeInsets.all(0),
+                                      border: InputBorder.none,
+                                    ),
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 37, 37, 37),
+                                      fontSize: 12,
+                                      fontFamily: ".SF NS Text",
+                                    ),
+                                    maxLines: 1,
+                                    autocorrect: false,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -554,9 +558,11 @@ class LeaserScreenState extends State<LeaserScreen> {
                                     width: 74,
                                     height: 28,
                                     child: FlatButton(
-                                      onPressed: () => this.onOption2ThreePressed(context),
+                                      onPressed: () =>
+                                          this.onOption2ThreePressed(context),
                                       color: Color.fromARGB(255, 255, 255, 255),
-                                      textColor: Color.fromARGB(255, 51, 59, 69),
+                                      textColor:
+                                          Color.fromARGB(255, 51, 59, 69),
                                       padding: EdgeInsets.all(0),
                                       child: Text(
                                         "Potato",
@@ -577,9 +583,11 @@ class LeaserScreenState extends State<LeaserScreen> {
                                     height: 28,
                                     margin: EdgeInsets.only(left: 10),
                                     child: FlatButton(
-                                      onPressed: () => this.onOptionThreePressed(context),
+                                      onPressed: () =>
+                                          this.onOptionThreePressed(context),
                                       color: Color.fromARGB(255, 255, 255, 255),
-                                      textColor: Color.fromARGB(255, 51, 59, 69),
+                                      textColor:
+                                          Color.fromARGB(255, 51, 59, 69),
                                       padding: EdgeInsets.all(0),
                                       child: Text(
                                         "Cereal",
@@ -689,9 +697,11 @@ class LeaserScreenState extends State<LeaserScreen> {
                                     width: 74,
                                     height: 28,
                                     child: FlatButton(
-                                      onPressed: () => this.onOption2Pressed(context),
+                                      onPressed: () =>
+                                          this.onOption2Pressed(context),
                                       color: Color.fromARGB(255, 255, 255, 255),
-                                      textColor: Color.fromARGB(255, 51, 59, 69),
+                                      textColor:
+                                          Color.fromARGB(255, 51, 59, 69),
                                       padding: EdgeInsets.all(0),
                                       child: Text(
                                         "Bio-Knospe",
@@ -712,10 +722,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                                     height: 28,
                                     margin: EdgeInsets.only(left: 10),
                                     child: FlatButton(
-                                      onPressed: () => this.onOptionPressed(context),
+                                      onPressed: () =>
+                                          this.onOptionPressed(context),
                                       color: Color.fromARGB(39, 168, 182, 200),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-                                      textColor: Color.fromARGB(255, 51, 59, 69),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8))),
+                                      textColor:
+                                          Color.fromARGB(255, 51, 59, 69),
                                       padding: EdgeInsets.all(0),
                                       child: Text(
                                         "Demeter",
@@ -764,7 +778,8 @@ class LeaserScreenState extends State<LeaserScreen> {
                     child: FlatButton(
                       onPressed: () => this.onOptionTwoPressed(context),
                       color: Color.fromARGB(39, 168, 182, 200),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
                       textColor: Color.fromARGB(255, 51, 59, 69),
                       padding: EdgeInsets.all(0),
                       child: Text(
@@ -923,7 +938,8 @@ class LeaserScreenState extends State<LeaserScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(left: 15, top: 15, right: 15),
+                                margin: EdgeInsets.only(
+                                    left: 15, top: 15, right: 15),
                                 child: Text(
                                   "Minimum Lease Price p.A.",
                                   style: TextStyle(
@@ -941,14 +957,16 @@ class LeaserScreenState extends State<LeaserScreen> {
                                   height: 18,
                                   margin: EdgeInsets.only(left: 16, top: 6),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           "Fr.",
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 12,
                                             fontFamily: "",
                                             fontWeight: FontWeight.w600,
@@ -969,12 +987,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                                               border: InputBorder.none,
                                             ),
                                             style: TextStyle(
-                                              color: Color.fromARGB(255, 37, 37, 37),
+                                              color: Color.fromARGB(
+                                                  255, 37, 37, 37),
                                               fontSize: 12,
                                               fontFamily: ".SF NS Text",
                                             ),
                                             maxLines: 1,
                                             autocorrect: false,
+                                            controller: _minPrice,
                                           ),
                                         ),
                                       ),
@@ -1020,14 +1040,16 @@ class LeaserScreenState extends State<LeaserScreen> {
                                 height: 18,
                                 margin: EdgeInsets.only(left: 15, top: 7),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
                                         "Fr.",
                                         style: TextStyle(
-                                          color: Color.fromARGB(255, 37, 37, 37),
+                                          color:
+                                              Color.fromARGB(255, 37, 37, 37),
                                           fontSize: 12,
                                           fontFamily: "",
                                           fontWeight: FontWeight.w600,
@@ -1048,12 +1070,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                                             border: InputBorder.none,
                                           ),
                                           style: TextStyle(
-                                            color: Color.fromARGB(255, 37, 37, 37),
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 12,
                                             fontFamily: ".SF NS Text",
                                           ),
                                           maxLines: 1,
                                           autocorrect: false,
+                                          controller: _maxPrice,
                                         ),
                                       ),
                                     ),
@@ -1083,16 +1107,19 @@ class LeaserScreenState extends State<LeaserScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Submit Lease Request",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 12,
-                            fontFamily: "Open Sans",
-                            fontWeight: FontWeight.w700,
+                        GestureDetector(
+                          child: Text(
+                            "Submit Lease Request",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 12,
+                              fontFamily: "Open Sans",
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.left,
-                        ),
+                          onTap: _searchLand,
+                        )
                       ],
                     ),
                   ),
@@ -1105,35 +1132,34 @@ class LeaserScreenState extends State<LeaserScreen> {
     );
   }
 
-  void onOption2Pressed(BuildContext context) {
-  
+  void _searchLand() async {
+    var filter = Filter(
+        minPrice: int.parse(_minPrice.text),
+        maxPrice: int.parse(_maxPrice.text),
+        feeForStandard: {},
+        feeForCrop: {},
+        beforeDate: _beforeDate,
+        afterDate: _afterDate);
+    await Api().filterLand(filter);
+    Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) => ResultScreen()),
+    );
   }
-  
-  void onOptionPressed(BuildContext context) {
-  
-  }
-  
-  void onOption2TwoPressed(BuildContext context) {
-  
-  }
-  
-  void onOptionTwoPressed(BuildContext context) {
-  
-  }
-  
-  void onOption2ThreePressed(BuildContext context) {
-  
-  }
-  
-  void onOptionThreePressed(BuildContext context) {
-  
-  }
-  
-  void onOption2FourPressed(BuildContext context) {
-  
-  }
-  
-  void onOptionFourPressed(BuildContext context) {
-  
-  }
+
+  void onOption2Pressed(BuildContext context) {}
+
+  void onOptionPressed(BuildContext context) {}
+
+  void onOption2TwoPressed(BuildContext context) {}
+
+  void onOptionTwoPressed(BuildContext context) {}
+
+  void onOption2ThreePressed(BuildContext context) {}
+
+  void onOptionThreePressed(BuildContext context) {}
+
+  void onOption2FourPressed(BuildContext context) {}
+
+  void onOptionFourPressed(BuildContext context) {}
 }

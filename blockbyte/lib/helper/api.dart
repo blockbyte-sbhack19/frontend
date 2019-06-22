@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 import 'package:blockbyte/model/land.dart';
+import 'package:blockbyte/model/filter.dart';
 
 class Api {
   factory Api() => _instance;
@@ -8,15 +10,14 @@ class Api {
   Api._internal();
 
   final _urlLender = "http://52.209.35.41:8081/api/lender/";
-
-  Future<List<Land>> getLand() async {
-    List jsonList = json.decode(await _get("$_urlLender/soil"));
-    List<Land> lands = jsonList.map((land) => Land.fromJson(land)).toList();
-    return lands;
-  }
+  final _urlLeaser = "http://52.209.35.41:8081/api/leaser/";
 
   Future<void> issueLand(Land land) async {
     await _post("$_urlLender/soil", land.toJson());
+  }
+
+  Future<void> filterLand(Filter filter) async {
+    await _post("$_urlLeaser/soil/filter", filter.toJson());
   }
 
   Future<String> _get(String url) async {
