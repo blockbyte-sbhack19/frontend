@@ -33,17 +33,19 @@ class IssueScreenState extends State<IssueScreen> {
                       children: <Widget>[
                         Text("Location"),
                         ListTile(
-                          leading: Text("GPS"),
+                          leading: Text("ZIP Code"),
                           title: CupertinoTextField(
                             controller: _location,
-                            placeholder: "Location",
+                            placeholder: "8000",
+                            keyboardType: TextInputType.number,
                           ),
                         ),
                         ListTile(
                           leading: Text("Size"),
                           title: CupertinoTextField(
                             controller: _size,
-                            placeholder: "Size",
+                            placeholder: "1000",
+                            keyboardType: TextInputType.number,
                           ),
                         )
                       ],
