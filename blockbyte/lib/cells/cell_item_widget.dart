@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class CellItemWidget extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return CellItemWidgetState();
@@ -11,10 +12,10 @@ class CellItemWidget extends StatefulWidget {
 
 class CellItemWidgetState extends State<CellItemWidget> {
   final double _kPickerSheetHeight = 216.0;
-  var _location = TextEditingController(text: "47.318549 8,8.7921308");
-  var _size = TextEditingController(text: "12.52");
-  var _beforeDate = DateTime.parse("2020-01-01");
-  var _afterDate = DateTime.parse("2022-01-01");
+  var location = TextEditingController(text: "47.318549 8,8.7921308");
+  var size = TextEditingController(text: "12.52");
+  var beforeDate = DateTime.parse("2020-01-01");
+  var afterDate = DateTime.parse("2022-01-01");
 
   Widget _buildBottomPicker(Widget picker) {
     return Container(
@@ -70,9 +71,9 @@ class CellItemWidgetState extends State<CellItemWidget> {
             return _buildBottomPicker(
               CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
-                initialDateTime: _beforeDate,
+                initialDateTime: beforeDate,
                 onDateTimeChanged: (DateTime newDateTime) {
-                  setState(() => _beforeDate = newDateTime);
+                  setState(() => beforeDate = newDateTime);
                 },
               ),
             );
@@ -82,7 +83,7 @@ class CellItemWidgetState extends State<CellItemWidget> {
       child: _buildMenu(<Widget>[
         const Text('Lease Start Date'),
         Text(
-          DateFormat.yMMMMd().format(_beforeDate),
+          DateFormat.yMMMMd().format(beforeDate),
         ),
       ]),
     );
@@ -97,9 +98,9 @@ class CellItemWidgetState extends State<CellItemWidget> {
             return _buildBottomPicker(
               CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
-                initialDateTime: _afterDate,
+                initialDateTime: afterDate,
                 onDateTimeChanged: (DateTime newDateTime) {
-                  setState(() => _afterDate = newDateTime);
+                  setState(() => afterDate = newDateTime);
                 },
               ),
             );
@@ -109,7 +110,7 @@ class CellItemWidgetState extends State<CellItemWidget> {
       child: _buildMenu(<Widget>[
         const Text('Lease End Date'),
         Text(
-          DateFormat.yMMMMd().format(_afterDate),
+          DateFormat.yMMMMd().format(afterDate),
         ),
       ]),
     );
@@ -223,7 +224,7 @@ class CellItemWidgetState extends State<CellItemWidget> {
                                   alignment: Alignment.topLeft,
                                   child: Container(
                                     child: TextField(
-                                      controller: _location,
+                                      controller: location,
                                       style: TextStyle(
                                         color: Color.fromARGB(255, 51, 59, 69),
                                         fontSize: 14,
@@ -330,7 +331,7 @@ class CellItemWidgetState extends State<CellItemWidget> {
                             alignment: Alignment.topLeft,
                             child: Container(
                               child: TextField(
-                                controller: _size,
+                                controller: size,
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 51, 59, 69),
                                   fontSize: 14,
@@ -463,7 +464,7 @@ class CellItemWidgetState extends State<CellItemWidget> {
                                           margin: EdgeInsets.symmetric(
                                               horizontal: 15),
                                           child: Text(
-                                            "Potatoe",
+                                            "Potato",
                                             style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 51, 59, 69),
