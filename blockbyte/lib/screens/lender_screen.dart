@@ -548,30 +548,26 @@ class LenderScreenState extends State<LenderScreen> {
                                         color: Color.fromARGB(255, 61, 146, 86),
                                         width: 2,
                                       ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
                                     ),
-                                    child: Container(
-                                      width: 74,
-                                      height: 28,
-                                      child: FlatButton(
-                                        onPressed: () =>
-                                            this.onOption2ThreePressed(context),
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        textColor:
-                                            Color.fromARGB(255, 51, 59, 69),
-                                        padding: EdgeInsets.all(0),
-                                        child: Text(
-                                          "Potato",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: "Lato",
-                                            fontWeight: FontWeight.w700,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.symmetric(horizontal: 15),
+                                          child: Text(
+                                            "Potato",
+                                            style: TextStyle(
+                                              color: Color.fromARGB(255, 51, 59, 69),
+                                              fontSize: 10,
+                                              fontFamily: "Lato",
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                            textAlign: TextAlign.center,
                                           ),
-                                          textAlign: TextAlign.center,
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -587,30 +583,26 @@ class LenderScreenState extends State<LenderScreen> {
                                         color: Color.fromARGB(255, 61, 146, 86),
                                         width: 2,
                                       ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
                                     ),
-                                    child: Container(
-                                      width: 74,
-                                      height: 28,
-                                      child: FlatButton(
-                                        onPressed: () =>
-                                            this.onOptionThreePressed(context),
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        textColor:
-                                            Color.fromARGB(255, 51, 59, 69),
-                                        padding: EdgeInsets.all(0),
-                                        child: Text(
-                                          "Cereal",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: "Lato",
-                                            fontWeight: FontWeight.w700,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.symmetric(horizontal: 19),
+                                          child: Text(
+                                            "Cereal",
+                                            style: TextStyle(
+                                              color: Color.fromARGB(255, 51, 59, 69),
+                                              fontSize: 10,
+                                              fontFamily: "Lato",
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                            textAlign: TextAlign.center,
                                           ),
-                                          textAlign: TextAlign.center,
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -1189,17 +1181,23 @@ class LenderScreenState extends State<LenderScreen> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Container(
+                                        width: 36,
+                                        height: 18,
                                         margin: EdgeInsets.only(left: 5),
-                                        child: Text(
-                                          "5000",
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            hintText: "5’000",
+                                            contentPadding: EdgeInsets.all(0),
+                                            border: InputBorder.none,
+                                          ),
                                           style: TextStyle(
                                             color:
                                                 Color.fromARGB(255, 37, 37, 37),
                                             fontSize: 12,
-                                            fontFamily: "",
-                                            fontWeight: FontWeight.w600,
+                                            fontFamily: ".SF NS Text",
                                           ),
-                                          textAlign: TextAlign.left,
+                                          maxLines: 1,
+                                          autocorrect: false,
                                         ),
                                       ),
                                     ),
@@ -1285,28 +1283,29 @@ class LenderScreenState extends State<LenderScreen> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: _issueLand,
-                    child: Container(
-                      height: 45,
-                      margin: EdgeInsets.only(left: 1),
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 61, 146, 86),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(19, 0, 0, 0),
-                            offset: Offset(0, 2),
-                            blurRadius: 38,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 97),
-                            child: Text(
+                            onTap: _issueLand,
+                            child: 
+                  Container(
+                    height: 45,
+                    margin: EdgeInsets.only(left: 1),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 61, 146, 86),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromARGB(19, 0, 0, 0),
+                          offset: Offset(0, 2),
+                          blurRadius: 38,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 97),
+                          child: Text(
                               "Submit Lease Offer",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 255, 255, 255),
@@ -1317,10 +1316,10 @@ class LenderScreenState extends State<LenderScreen> {
                               textAlign: TextAlign.left,
                             ),
                           ),
-                        ],
-                      ),
+                        
+                      ],
                     ),
-                  ),
+                  ),),
                 ],
               ),
             ),

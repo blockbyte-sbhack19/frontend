@@ -907,6 +907,7 @@ class InsuranceScreenState extends State<InsuranceScreen> {
       ),
     );
     Future.delayed(const Duration(seconds: 2), () => "2").then((value) {
+      Navigator.pop(context);
       showDialog(
         context: context,
         builder: (BuildContext context) => new CupertinoAlertDialog(

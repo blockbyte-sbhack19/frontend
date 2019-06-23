@@ -600,6 +600,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                                   child: Container(
                                     width: 74,
                                     height: 28,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                        color: Color.fromARGB(255, 255, 151, 84),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
                                     child: FlatButton(
                                       onPressed: () =>
                                           this.onOption2ThreePressed(context),
@@ -624,6 +632,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                                   child: Container(
                                     width: 74,
                                     height: 28,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                        color: Color.fromARGB(255, 255, 151, 84),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
                                     margin: EdgeInsets.only(left: 10),
                                     child: FlatButton(
                                       onPressed: () =>
@@ -655,6 +671,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                   Container(
                     width: 74,
                     height: 28,
+                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                        color: Color.fromARGB(255, 255, 151, 84),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
                     margin: EdgeInsets.only(top: 20, right: 10),
                     child: FlatButton(
                       onPressed: () => this.onOption2FourPressed(context),
@@ -675,6 +699,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                   Container(
                     width: 74,
                     height: 28,
+                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                        color: Color.fromARGB(255, 255, 151, 84),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
                     margin: EdgeInsets.only(top: 20),
                     child: FlatButton(
                       onPressed: () => this.onOptionFourPressed(context),
@@ -739,6 +771,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                                   child: Container(
                                     width: 74,
                                     height: 28,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                        color: Color.fromARGB(255, 255, 151, 84),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
                                     child: FlatButton(
                                       onPressed: () =>
                                           this.onOption2Pressed(context),
@@ -797,6 +837,14 @@ class LeaserScreenState extends State<LeaserScreen> {
                   Container(
                     width: 74,
                     height: 28,
+                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                        color: Color.fromARGB(255, 255, 151, 84),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    ),
                     margin: EdgeInsets.only(top: 20, right: 10),
                     child: FlatButton(
                       onPressed: () => this.onOption2TwoPressed(context),

@@ -6,6 +6,7 @@ import 'package:blockbyte/helper/api.dart';
 
 import 'package:blockbyte/model/result/result.dart';
 import 'package:blockbyte/model/lease.dart';
+import 'package:blockbyte/screens/insurance_screen.dart';
 
 class ResultScreen extends StatefulWidget {
   final Result result;
@@ -2800,13 +2801,18 @@ class ResultScreenState extends State<ResultScreen> {
 
   Future<void> _leaseLand(Lease lease) async {
     await Api().leaseLand(lease);
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => new CupertinoAlertDialog(
-        content: new Text("Land has been leased"),
-      ),
+    Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) => InsuranceScreen()),
     ).then((value) {
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => new CupertinoAlertDialog(
+          content: new Text("Land has been leased"),
+        ),
+      ).then((value) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      });
     });
   }
 
