@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:blockbyte/model/land.dart';
 import 'package:blockbyte/model/filter.dart';
+import 'package:blockbyte/model/lease.dart';
 
 class Api {
   factory Api() => _instance;
@@ -18,6 +19,10 @@ class Api {
 
   Future<Map> filterLand(Filter filter) async {
     return json.decode(await _post("$_urlLeaser/soil/filter", filter.toJson()));
+  }
+
+  Future<void> leaseLand(Lease lease) async {
+    await _post("$_urlLeaser/soil/lease", lease.toJson());
   }
 
   Future<String> _get(String url) async {

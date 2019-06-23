@@ -9,6 +9,7 @@ import 'package:blockbyte/model/result/result_land_all.dart';
 import 'package:blockbyte/model/result/result_land.dart';
 import 'package:blockbyte/model/result/result_lease.dart';
 import 'package:blockbyte/model/result/result_details.dart';
+import 'package:blockbyte/model/lease.dart';
 
 class ResultScreen extends StatefulWidget {
   final Result result;
@@ -317,37 +318,19 @@ class ResultScreenState extends State<ResultScreen> {
                                                       alignment:
                                                           Alignment.topLeft,
                                                       child: Container(
-                                                        width: 57,
-                                                        height: 22,
-                                                        margin: EdgeInsets.only(
-                                                            right: 9),
-                                                        child: TextField(
-                                                          decoration:
-                                                              InputDecoration(
-                                                            hintText: "20.000",
-                                                            contentPadding:
-                                                                EdgeInsets.all(
-                                                                    0),
-                                                            border: InputBorder
-                                                                .none,
-                                                          ),
-                                                          style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    37,
-                                                                    37,
-                                                                    37),
-                                                            fontSize: 16,
-                                                            fontFamily:
-                                                                "Open Sans",
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                          ),
-                                                          maxLines: 1,
-                                                          autocorrect: false,
-                                                        ),
-                                                      ),
+                                        margin: EdgeInsets.only(right: 3),
+                                        child: Text(
+                                          "37",
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 37, 37, 37),
+                                            fontSize: 16,
+                                            fontFamily: "Open Sans",
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ),
                                                     ),
                                                     Align(
                                                       alignment:
@@ -403,33 +386,47 @@ class ResultScreenState extends State<ResultScreen> {
                                                           Radius.circular(6)),
                                                 ),
                                                 child: Container(
-                                                  child:
-                                                      Column(children: <Widget>[Container(
-          margin: EdgeInsets.only(left: 15, top: 10),
-          child: Text(
-            "Lease Start Date",
-            style: TextStyle(
-              color: Color.fromARGB(255, 156, 155, 156),
-              fontSize: 12,
-              fontFamily: "Lato",
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 15, top: 8),
-          child: Text(
-            DateFormat(_dateFormat).format(_beforeDate),
-            style: TextStyle(
-              color: Color.fromARGB(255, 37, 37, 37),
-              fontSize: 14,
-              fontFamily: "",
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ),],)
-                                                ),
+                                                    child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 15, top: 10),
+                                                      child: Text(
+                                                        "Lease Start Date",
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              156,
+                                                              155,
+                                                              156),
+                                                          fontSize: 12,
+                                                          fontFamily: "Lato",
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 15, top: 8),
+                                                      child: Text(
+                                                        DateFormat(_dateFormat)
+                                                            .format(
+                                                                _beforeDate),
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 37, 37, 37),
+                                                          fontSize: 14,
+                                                          fontFamily: "",
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )),
                                               ),
                                             ),
                                             Spacer(),
@@ -454,33 +451,46 @@ class ResultScreenState extends State<ResultScreen> {
                                                           Radius.circular(6)),
                                                 ),
                                                 child: Container(
-                                                  child:
-                                                      Column(children: <Widget>[Container(
-          margin: EdgeInsets.only(left: 15, top: 10),
-          child: Text(
-            "Lease End Date",
-            style: TextStyle(
-              color: Color.fromARGB(255, 156, 155, 156),
-              fontSize: 12,
-              fontFamily: "Lato",
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 15, top: 8),
-          child: Text(
-            DateFormat(_dateFormat).format(_afterDate),
-            style: TextStyle(
-              color: Color.fromARGB(255, 37, 37, 37),
-              fontSize: 14,
-              fontFamily: "",
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ),],)
-                                                ),
+                                                    child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 15, top: 10),
+                                                      child: Text(
+                                                        "Lease End Date",
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              156,
+                                                              155,
+                                                              156),
+                                                          fontSize: 12,
+                                                          fontFamily: "Lato",
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 15, top: 8),
+                                                      child: Text(
+                                                        DateFormat(_dateFormat)
+                                                            .format(_afterDate),
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 37, 37, 37),
+                                                          fontSize: 14,
+                                                          fontFamily: "",
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )),
                                               ),
                                             ),
                                           ],
@@ -525,15 +535,10 @@ class ResultScreenState extends State<ResultScreen> {
                                       ),
                                       Spacer(),
                                       Container(
-                                        width: 57,
-                                        height: 22,
                                         margin: EdgeInsets.only(right: 3),
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            hintText: "20.000",
-                                            contentPadding: EdgeInsets.all(0),
-                                            border: InputBorder.none,
-                                          ),
+                                        child: Text(
+                                          _result.lands[0].details.landSize
+                                              .toString(),
                                           style: TextStyle(
                                             color:
                                                 Color.fromARGB(255, 37, 37, 37),
@@ -541,8 +546,7 @@ class ResultScreenState extends State<ResultScreen> {
                                             fontFamily: "Open Sans",
                                             fontWeight: FontWeight.w700,
                                           ),
-                                          maxLines: 1,
-                                          autocorrect: false,
+                                          textAlign: TextAlign.left,
                                         ),
                                       ),
                                       Container(
@@ -1068,7 +1072,6 @@ class ResultScreenState extends State<ResultScreen> {
                                                       textAlign: TextAlign.left,
                                                     ),
                                                   ),
-                                                  
                                                 ],
                                               ),
                                             ),
@@ -1116,7 +1119,6 @@ class ResultScreenState extends State<ResultScreen> {
                                                 ],
                                               ),
                                             ),
-                                            
                                           ],
                                         ),
                                       ),
@@ -1149,7 +1151,6 @@ class ResultScreenState extends State<ResultScreen> {
                                                       textAlign: TextAlign.left,
                                                     ),
                                                   ),
-                                                  
                                                 ],
                                               ),
                                             ),
@@ -1312,6 +1313,7 @@ class ResultScreenState extends State<ResultScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(4))),
                       textColor: Color.fromARGB(255, 1, 48, 94),
                       padding: EdgeInsets.all(0),
+                      child: GestureDetector(onTap: _leaseLand,
                       child: Text(
                         "Select this Lease",
                         style: TextStyle(
@@ -1320,7 +1322,7 @@ class ResultScreenState extends State<ResultScreen> {
                           fontWeight: FontWeight.w700,
                         ),
                         textAlign: TextAlign.left,
-                      ),
+                      ),) 
                     ),
                   ),
                 ),
@@ -1330,6 +1332,33 @@ class ResultScreenState extends State<ResultScreen> {
         ],
       ),
     );
+  }
+
+  void _leaseLand() async {
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) => new CupertinoAlertDialog(
+    //     content: CupertinoActivityIndicator(),
+    //   ),
+    // );
+    var lease = Lease(
+      id: "90dccff8-89ac-4bc4-a61d-3497709713c4",
+      owner: "O=Lender, L=London, C=GB",
+      bioStandard: "UNKNOWN",
+      typeOfCrop: "UNKNOWN",
+      beforeDate: _beforeDate,
+      afterDate: _afterDate,
+      finalPrice: 1000
+      );
+    await Api().leaseLand(lease);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => new CupertinoAlertDialog(
+        content: new Text("Land has been leased"),
+      ),
+    ).then((value) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
   }
 
   void onOption2Pressed(BuildContext context) {}

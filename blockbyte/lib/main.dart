@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:blockbyte/screens/home_screen.dart';
-import 'package:blockbyte/screens/main_screen.dart';
 
 void main() => runApp(MyApp());
 

@@ -1,13 +1,13 @@
 final String _keyLatitude = 'latitude';
 final String _keyLongitude = 'altitude';
-final String _keyLandSize = 'landSize';
+final String _keyLandSize = 'size';
 final String _keyBeforeDate = 'beforeDate';
 final String _keyAfterDate = 'afterDate';
 
 class ResultDetails {
   final int latitude;
   final int longitude;
-  final double landSize;
+  final int landSize;
   final DateTime beforeDate;
   final DateTime afterDate;
 
