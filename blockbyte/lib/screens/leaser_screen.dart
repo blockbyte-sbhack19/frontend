@@ -18,7 +18,6 @@ class LeaserScreenState extends State<LeaserScreen> {
   final String _dateFormat = "dd/MM/yyyy";
   final double _kPickerSheetHeight = 216.0;
   var _coordinate = TextEditingController(text: "47,8");
-  var _landSize = TextEditingController(text: "12.52");
   var _minPrice = TextEditingController(text: "10000");
   var _maxPrice = TextEditingController(text: "30000");
   var _beforeDate = DateTime.parse("2020-01-01");
@@ -426,7 +425,7 @@ class LeaserScreenState extends State<LeaserScreen> {
                                   margin: EdgeInsets.only(left: 16, top: 6),
                                   child: TextField(
                                     decoration: InputDecoration(
-                                      hintText: "5.00",
+                                      hintText: "5",
                                       contentPadding: EdgeInsets.all(0),
                                       border: InputBorder.none,
                                     ),
@@ -482,7 +481,7 @@ class LeaserScreenState extends State<LeaserScreen> {
                                   margin: EdgeInsets.only(left: 15, top: 7),
                                   child: TextField(
                                     decoration: InputDecoration(
-                                      hintText: "10.00",
+                                      hintText: "15",
                                       contentPadding: EdgeInsets.all(0),
                                       border: InputBorder.none,
                                     ),
@@ -1135,24 +1134,25 @@ class LeaserScreenState extends State<LeaserScreen> {
                     ),
                   ),
                   Spacer(),
-                  Container(
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 151, 84),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(19, 0, 0, 0),
-                          offset: Offset(0, 2),
-                          blurRadius: 38,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          child: Text(
+                  GestureDetector(
+                    onTap: _searchLand,
+                    child: Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 151, 84),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(19, 0, 0, 0),
+                            offset: Offset(0, 2),
+                            blurRadius: 38,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
                             "Submit Lease Request",
                             style: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
@@ -1162,9 +1162,8 @@ class LeaserScreenState extends State<LeaserScreen> {
                             ),
                             textAlign: TextAlign.left,
                           ),
-                          onTap: _searchLand,
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -1187,7 +1186,10 @@ class LeaserScreenState extends State<LeaserScreen> {
     Result result = Result.fromJson(await Api().filterLand(filter));
     Navigator.push(
       context,
-      CupertinoPageRoute(builder: (context) => ResultScreen(result: result,)),
+      CupertinoPageRoute(
+          builder: (context) => ResultScreen(
+                result: result,
+              )),
     );
   }
 

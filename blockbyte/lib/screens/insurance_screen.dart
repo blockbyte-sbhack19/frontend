@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:io';
 
 class InsuranceScreen extends StatefulWidget {
   @override
@@ -13,9 +12,6 @@ class InsuranceScreen extends StatefulWidget {
 class InsuranceScreenState extends State<InsuranceScreen> {
   final String _dateFormat = "dd/MM/yyyy";
   final double _kPickerSheetHeight = 216.0;
-  var _coordinate = TextEditingController(text: "47,8");
-  var _landSize = TextEditingController(text: "12.52");
-  var _landPrice = "20000";
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
 

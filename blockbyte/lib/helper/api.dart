@@ -25,15 +25,15 @@ class Api {
     await _post("$_urlLeaser/soil/lease", lease.toJson());
   }
 
-  Future<String> _get(String url) async {
-    final response = await http.get(url);
+  // Future<String> _get(String url) async {
+  //   final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      throw Exception('Failed to load post');
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     return response.body;
+  //   } else {
+  //     throw Exception('Failed to load post');
+  //   }
+  // }
 
   Future<String> _post(String url, Map body) async {
     final response = await http.post(url,

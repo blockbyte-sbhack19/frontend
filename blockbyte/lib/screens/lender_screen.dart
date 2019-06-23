@@ -1284,28 +1284,28 @@ class LenderScreenState extends State<LenderScreen> {
                     ),
                   ),
                   Spacer(),
-                  Container(
-                    height: 45,
-                    margin: EdgeInsets.only(left: 1),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 61, 146, 86),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(19, 0, 0, 0),
-                          offset: Offset(0, 2),
-                          blurRadius: 38,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 97),
-                          child: GestureDetector(
-                            onTap: _issueLand,
+                  GestureDetector(
+                    onTap: _issueLand,
+                    child: Container(
+                      height: 45,
+                      margin: EdgeInsets.only(left: 1),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 61, 146, 86),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(19, 0, 0, 0),
+                            offset: Offset(0, 2),
+                            blurRadius: 38,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 97),
                             child: Text(
                               "Submit Lease Offer",
                               style: TextStyle(
@@ -1317,8 +1317,8 @@ class LenderScreenState extends State<LenderScreen> {
                               textAlign: TextAlign.left,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
