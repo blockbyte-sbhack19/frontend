@@ -28,7 +28,7 @@ class MainScreenState extends State<MainScreen> {
               );
             },
             child: SizedBox(
-              height: 200,
+              height: 100,
               child: Card(
                 child: Center(
                     child: Text(
@@ -46,7 +46,7 @@ class MainScreenState extends State<MainScreen> {
               );
             },
             child: SizedBox(
-              height: 200,
+              height: 100,
               child: Card(
                 child: Center(
                     child: Text(
@@ -64,7 +64,7 @@ class MainScreenState extends State<MainScreen> {
               );
             },
             child: SizedBox(
-              height: 200,
+              height: 100,
               child: Card(
                 child: Center(
                     child: Text(

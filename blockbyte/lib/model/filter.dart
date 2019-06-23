@@ -1,23 +1,23 @@
 final String _keyMinPrice = 'minPrice';
 final String _keyMaxPrice = 'maxPrice';
-final String _keyFeeForStandard = 'feeForStandard';
-final String _keyFeeForCrop = 'feeForCrop';
+final String _keybioStandard = 'bioStandard';
+final String _keyTypeOfCrop = 'typeOfCrop';
 final String _keyBeforeDate = 'beforeDate';
 final String _keyAfterDate = 'afterDate';
 
 class Filter {
   final int minPrice;
   final int maxPrice;
-  final Map feeForStandard;
-  final Map feeForCrop;
+  final List bioStandard;
+  final List typeOfCrop;
   final DateTime beforeDate;
   final DateTime afterDate;
 
   Filter(
       {this.minPrice,
       this.maxPrice,
-      this.feeForStandard,
-      this.feeForCrop,
+      this.bioStandard,
+      this.typeOfCrop,
       this.beforeDate,
       this.afterDate});
 
@@ -25,8 +25,8 @@ class Filter {
     return Filter(
       minPrice: json[_keyMinPrice],
       maxPrice: json[_keyMaxPrice],
-      feeForStandard: Map.from(json[_keyFeeForStandard]),
-      feeForCrop: Map.from(json[_keyFeeForCrop]),
+      bioStandard: json[_keybioStandard],
+      typeOfCrop: json[_keyTypeOfCrop],
       beforeDate: DateTime.fromMillisecondsSinceEpoch(json[_keyBeforeDate]),
       afterDate: DateTime.fromMillisecondsSinceEpoch(json[_keyAfterDate]),
     );
@@ -35,8 +35,8 @@ class Filter {
   Map toJson() => {
         _keyMinPrice: minPrice,
         _keyMaxPrice: maxPrice,
-        _keyFeeForStandard: feeForStandard,
-        _keyFeeForCrop: feeForCrop,
+        _keybioStandard: bioStandard,
+        _keyTypeOfCrop: typeOfCrop,
         _keyBeforeDate: beforeDate.millisecondsSinceEpoch,
         _keyAfterDate: afterDate.millisecondsSinceEpoch
       };

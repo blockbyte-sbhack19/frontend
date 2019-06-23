@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:blockbyte/helper/api.dart';
 import 'package:blockbyte/model/filter.dart';
+import 'package:blockbyte/model/result/result.dart';
 import 'package:blockbyte/screens/result_screen.dart';
 
 class LeaserScreen extends StatefulWidget {
@@ -18,8 +19,8 @@ class LeaserScreenState extends State<LeaserScreen> {
   final double _kPickerSheetHeight = 216.0;
   var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
-  var _minPrice = TextEditingController(text: "0");
-  var _maxPrice = TextEditingController(text: "1000");
+  var _minPrice = TextEditingController(text: "10000");
+  var _maxPrice = TextEditingController(text: "30000");
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
 
@@ -1179,14 +1180,14 @@ class LeaserScreenState extends State<LeaserScreen> {
     var filter = Filter(
         minPrice: int.parse(_minPrice.text),
         maxPrice: int.parse(_maxPrice.text),
-        feeForStandard: {},
-        feeForCrop: {},
+        bioStandard: [],
+        typeOfCrop: [],
         beforeDate: _beforeDate,
         afterDate: _afterDate);
-    await Api().filterLand(filter);
+    Result result = Result.fromJson(await Api().filterLand(filter));
     Navigator.push(
       context,
-      CupertinoPageRoute(builder: (context) => ResultScreen()),
+      CupertinoPageRoute(builder: (context) => ResultScreen(result: result,)),
     );
   }
 

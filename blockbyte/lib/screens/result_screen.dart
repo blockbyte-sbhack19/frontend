@@ -3,9 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:blockbyte/helper/api.dart';
-import 'package:blockbyte/model/land.dart';
+
+import 'package:blockbyte/model/result/result.dart';
+import 'package:blockbyte/model/result/result_land_all.dart';
+import 'package:blockbyte/model/result/result_land.dart';
+import 'package:blockbyte/model/result/result_lease.dart';
+import 'package:blockbyte/model/result/result_details.dart';
 
 class ResultScreen extends StatefulWidget {
+  final Result result;
+
+  const ResultScreen({
+    @required this.result,
+  }) : assert(result != null);
+
   @override
   ResultScreenState createState() {
     return ResultScreenState();
@@ -13,11 +24,18 @@ class ResultScreen extends StatefulWidget {
 }
 
 class ResultScreenState extends State<ResultScreen> {
+  Result _result = Result();
   final String _dateFormat = "dd/MM/yyyy";
   var _coordinate = TextEditingController(text: "47,8");
   var _landSize = TextEditingController(text: "12.52");
   var _beforeDate = DateTime.parse("2020-01-01");
   var _afterDate = DateTime.parse("2022-01-01");
+
+  @override
+  void initState() {
+    super.initState();
+    _result = widget.result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -931,23 +949,16 @@ class ResultScreenState extends State<ResultScreen> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Container(
-                                  width: 62,
-                                  height: 24,
-                                  margin: EdgeInsets.only(left: 7),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: "20’000",
-                                      contentPadding: EdgeInsets.all(0),
-                                      border: InputBorder.none,
-                                    ),
+                                  margin: EdgeInsets.only(left: 9),
+                                  child: Text(
+                                    _result.lands[0].lease.landPrice.toString(),
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 37, 37, 37),
                                       fontSize: 16,
                                       fontFamily: "Open Sans",
                                       fontWeight: FontWeight.w700,
                                     ),
-                                    maxLines: 1,
-                                    autocorrect: false,
+                                    textAlign: TextAlign.left,
                                   ),
                                 ),
                               ),

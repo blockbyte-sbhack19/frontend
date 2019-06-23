@@ -16,8 +16,8 @@ class Api {
     await _post("$_urlLender/soil", land.toJson());
   }
 
-  Future<void> filterLand(Filter filter) async {
-    await _post("$_urlLeaser/soil/filter", filter.toJson());
+  Future<Map> filterLand(Filter filter) async {
+    return json.decode(await _post("$_urlLeaser/soil/filter", filter.toJson()));
   }
 
   Future<String> _get(String url) async {
@@ -30,11 +30,13 @@ class Api {
     }
   }
 
-  Future<void> _post(String url, Map body) async {
+  Future<String> _post(String url, Map body) async {
     final response = await http.post(url,
         body: json.encode(body), headers: {"Content-Type": "application/json"});
 
-    if (response.statusCode != 200) {
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
       throw Exception('Failed to load post');
     }
   }

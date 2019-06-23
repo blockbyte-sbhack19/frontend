@@ -188,6 +188,12 @@ class LenderScreenState extends State<LenderScreen> {
   }
 
   void _issueLand() async {
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) => new CupertinoAlertDialog(
+    //     content: CupertinoActivityIndicator(),
+    //   ),
+    // );
     var land = Land(
         latitude: int.parse(_coordinate.text.split(',')[0]),
         longitude: int.parse(_coordinate.text.split(',')[1]),

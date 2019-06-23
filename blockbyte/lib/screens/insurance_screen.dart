@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
 
 class InsuranceScreen extends StatefulWidget {
   @override
@@ -345,8 +346,8 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                                           Radius.circular(2)),
                                                 ),
                                                 child: Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 3),
+                                                  margin:
+                                                      EdgeInsets.only(top: 3),
                                                   child: Text(
                                                     "66%",
                                                     style: TextStyle(
@@ -683,7 +684,7 @@ class InsuranceScreenState extends State<InsuranceScreen> {
                                   height: 40,
                                   child: FlatButton(
                                     onPressed: () =>
-                                        this.onBtnPaymentTwoPressed(context),
+                                        this._getInsurance(context),
                                     color: Color.fromARGB(255, 61, 146, 86),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -901,7 +902,25 @@ class InsuranceScreenState extends State<InsuranceScreen> {
 
   void onBtnPaymentPressed(BuildContext context) {}
 
-  void onBtnPaymentTwoPressed(BuildContext context) {}
+  void _getInsurance(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => new CupertinoAlertDialog(
+        title: Text("Waiting for approval"),
+        content: CupertinoActivityIndicator(),
+      ),
+    );
+    Future.delayed(const Duration(seconds: 2), () => "2").then((value) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => new CupertinoAlertDialog(
+          content: new Text("Insurance has been approved"),
+        ),
+      ).then((value) {
+        Navigator.pop(context);
+      });
+    });
+  }
 
   void onOption2Pressed(BuildContext context) {}
 
